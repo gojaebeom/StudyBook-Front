@@ -1,0 +1,19 @@
+// 모바일
+@media (min-width:0px) {
+    .section{
+        margin-top:50px;
+        width: 100%;
+        display: flex;
+        justify-content:center;
+
+        .position-container{
+            width: 100%;
+            max-width: 800px;
+        }
+    }
+}
+
+// 테블릿
+@media (min-width:501px) {
+
+}

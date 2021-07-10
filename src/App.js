@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import SummaryCard from "./components/cards/SummaryCard";
+import JoinForm from "./components/JoinForm";
+import LoginForm from "./components/LoginForm";
+import DefaultLayout from "./layouts/DefaultLayout";
+import SignLayout from "./layouts/SignLayout";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default function App() {
+    return (
+    <div className="app-container">
+        <Switch>
+            <Route exact path="/">
+                <DefaultLayout>
+                    <SummaryCard />
+                </DefaultLayout>
+            </Route>
+            <Route exact path="/login">
+                <SignLayout children={<LoginForm />}/>
+            </Route>
+            <Route exact path="/join">
+                <SignLayout children={<JoinForm />}/>
+            </Route>
+        </Switch>
     </div>
-  );
+    );
 }
-
-export default App;

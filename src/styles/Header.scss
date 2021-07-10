@@ -1,0 +1,48 @@
+// 모바일
+@media (min-width:0px) {
+    .header{
+        width:100%;
+
+        display: flex;
+        justify-content:center;
+        
+        background-color: white;
+        border-bottom: 1px solid #E6E6E6;
+
+        .position-container{
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content:space-between;
+
+
+            .left-menu{
+                .title{
+                    font-family: 'Pacifico', cursive;
+                    font-size:x-large;
+                    color:black;
+                    text-decoration-line: none;
+                }
+            }
+
+            .right-menu{
+                display:flex; 
+                justify-content:center;
+                align-items:center;
+                .menu{
+                    font-size:large;
+                    font-weight: bold;
+                    color:#2733e6;
+                    text-decoration-line: none;
+                }
+            }
+        }
+    }
+}
+
+// 테블릿
+@media (min-width:501px) {
+
+}
+
+

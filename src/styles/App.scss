@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+// Default Styles
+body{
+    margin:0px;
+    background-color: #F2F2F2;
+
+    a{ text-decoration-line: none; color:#0080FF;}
+}
+
+@import "./Header.scss";
+@import "./Section.scss";
+@import "./SignContainer.scss";
+@import "./SignForm.scss";
+@import "./SummaryCard.scss";

@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import SummaryCard from "./components/cards/SummaryCard";
-import JoinForm from "./components/JoinForm";
-import LoginForm from "./components/LoginForm";
-import DefaultLayout from "./layouts/DefaultLayout";
-import SignLayout from "./layouts/SignLayout";
+import JoinForm from "./components/widgets/JoinForm";
+import LoginForm from "./components/widgets/LoginForm";
+import DefaultLayout from "./components/layouts/DefaultLayout";
+import SignLayout from "./components/layouts/SignLayout";
+import Feed from "./components/containers/Feed";
 
 export default function App() {
     return (
@@ -12,7 +12,7 @@ export default function App() {
         <Switch>
             <Route exact path="/">
                 <DefaultLayout>
-                    <SummaryCard />
+                    <Feed />
                 </DefaultLayout>
             </Route>
             <Route exact path="/login">

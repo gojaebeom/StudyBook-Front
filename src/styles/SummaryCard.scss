@@ -48,4 +48,24 @@
             border-radius:5px;
         }
     }
+
+    .description-container{
+        margin-bottom:15px;
+    }
+
+    .interaction-container{
+        display: flex;
+        justify-content:flex-start;
+
+        .icon-container{
+            display: flex;
+            
+            align-items:center;
+            margin-right:10px;
+            i{ 
+               font-size: x-large;
+               margin-right:5px;
+            }
+        }
+    }
 }

@@ -6,6 +6,8 @@ body{
     background-color: #F2F2F2;
 
     a{ text-decoration-line: none; color:#0080FF;}
+
+    input:focus {outline:none;}
 }
 
 @import "./Header.scss";

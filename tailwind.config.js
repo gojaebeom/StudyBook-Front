@@ -5,6 +5,8 @@ module.exports = {
         extend: {
             width:{
                 "600":"600px",
+                "700":"700px",
+                "800":"800px",
             },
             fontFamily: {
                 'noto-regular': ['noto-regular'],
@@ -14,7 +16,9 @@ module.exports = {
                 'noto-light': ['noto-light'],
                 'noto-medium': ['noto-medium'],
                 'pacifico': ['pacifico'],
-            }
+            },
+            backgroundColor: ['checked'],
+            borderColor: ['checked'],
         },
     },
     variants: {

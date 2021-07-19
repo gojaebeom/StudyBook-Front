@@ -4,7 +4,7 @@ import CoverImg2 from "./images/cover2.jpg";
 function App() {
     return (
         <div className="App w-full flex justify-center">
-            <div className="w-full md:w-600 h-screen flex flex-col items-center">
+            <div className="w-full md:w-700 h-screen flex flex-col items-center">
                 <header className="w-full py-6 flex justify-center items-center border-b border-gray-100">
                     <figure className="font-pacifico text-3xl text-black font-bold">
                         STUDYBOOK

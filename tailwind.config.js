@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             width:{
-                "600":"600px",
+                "700":"700px",
             },
             fontFamily: {
                 'noto-regular': ['noto-regular'],

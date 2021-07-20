@@ -15,7 +15,7 @@ export default function Main(){
   <React.Fragment>
     <Header/>
     <br/>
-    <PostSearch/>
+    {/* <PostSearch/> */}
     <PostFilter/>
     <PostList>
       {

@@ -11,10 +11,11 @@ function Header({ history, isCanBack }) {
           history.goBack();
         }}
       >
-        <i className="fas fa-chevron-left text-3xl"></i>
+        <i className="fas fa-chevron-left text-3xl text-gray-700"></i>
       </div>
     }
-    <figure className="font-pacifico text-3xl text-black font-bold">
+    <figure className="font-noto-black text-3xl bg-gradient-to-r from-gray-500 to-gray-900
+      bg-clip-text text-transparent">
         <Link to="/">STUDYBOOK</Link>
     </figure>
   </header>

@@ -2,13 +2,20 @@ import { Route, Switch } from "react-router-dom";
 import LoginButton from "./components/LoginButton";
 import Main from "./components/pages/Main";
 import PostDetail from "./components/pages/PostDetail";
-import Login from "./components/pages/Login";
+import KakaoLogin from "./components/pages/KakaoLogin";
+import useLogin from "./hooks/useLogin";
+import LoginButtonContainer from "./components/LoginButtonContainer";
+import LoggedInButton from "./components/LoggedInButton";
+import UserDetail from "./components/pages/UserDetail";
 
 
 export default function App() {
+
+  const { isLogin, setIsLogin } = useLogin();
+
   return (
   <div className="App w-full flex justify-center">
-    <div className="relative w-full md:w-600 h-screen flex flex-col items-center z-10">
+    <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
       <Switch>
         <Route exact path="/">
           <Main/>
@@ -16,17 +23,20 @@ export default function App() {
         <Route exact path="/posts/:id">
           <PostDetail/>
         </Route>
-        <Route exact path="/users/login">
-          <Login/>
+        <Route exact path="/users/:id">
+          <UserDetail/>
+        </Route>
+        <Route exact path="/users/kakao/login">
+          <KakaoLogin
+            setIsLogin={setIsLogin}
+          />
         </Route>
       </Switch>
-      
     </div>
-    <div className="fixed w-full flex justify-center border z-40 md:z-0">
-      <div className="w-0 h-0 md:w-800 md:h-screen flex justify-end items-center ">
-        <LoginButton />
-      </div>
-    </div>
+    <LoginButtonContainer>
+        { isLogin && <LoggedInButton /> }
+        { !isLogin && <LoginButton /> }
+    </LoginButtonContainer>
   </div>
   );
 }

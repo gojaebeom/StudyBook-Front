@@ -7,6 +7,8 @@ import useLogin from "./hooks/useLogin";
 import LoginButtonContainer from "./components/LoginButtonContainer";
 import LoggedInButton from "./components/LoggedInButton";
 import UserDetail from "./components/pages/UserDetail";
+import PostCreate from "./components/pages/PostCreate";
+import Header from "./components/Header";
 
 
 export default function App() {
@@ -16,9 +18,13 @@ export default function App() {
   return (
   <div className="App w-full flex justify-center">
     <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
+      <Header/>
       <Switch>
         <Route exact path="/">
           <Main/>
+        </Route>
+        <Route exact path="/posts/create">
+          <PostCreate/>
         </Route>
         <Route exact path="/posts/:id">
           <PostDetail/>
@@ -34,7 +40,7 @@ export default function App() {
       </Switch>
     </div>
     <LoginButtonContainer>
-        { isLogin && <LoggedInButton /> }
+        { isLogin && <LoggedInButton setIsLogin={setIsLogin}/> }
         { !isLogin && <LoginButton /> }
     </LoginButtonContainer>
   </div>

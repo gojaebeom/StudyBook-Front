@@ -3,9 +3,7 @@ import PostFilter from "../PostFilter";
 import PostListItem from "../PostListItem";
 
 import PostList from "../PostList";
-import PostSearch from "../PostSearch";
 import React from "react";
-import Header from "../Header";
 
 export default function Main(){
 
@@ -13,7 +11,6 @@ export default function Main(){
 
   return(
   <React.Fragment>
-    <Header/>
     <br/>
     {/* <PostSearch/> */}
     <PostFilter/>

@@ -1,28 +1,27 @@
 import KakaoImg from "../images/kakao.png";
 import GoogleImg from "../images/google.png";
-import axios from "axios";
 
 export default function LoginButton(){
 
-  const googleLoginClick = async () => {
-    const params = new URLSearchParams();
-    params.append('grant_type', 'client_credentials');
-    const res = await axios({
-      method:"post",
-      url:"https://apitest.acme.com/oauth/token",
-      headers:{
-        "Content-type":"application/x-www-form-urlencoded;charset=utf-8",
-        "Authorization":"Basic 880767493513-ried2fter5tut31am250f867tgv7ms14.apps.googleusercontent.com",
-      },
-      data:params, 
-    })
-    .then(data => data.data)
-    .catch(err => console.log(err));
-  }
+  // const googleLoginClick = async () => {
+  //   const params = new URLSearchParams();
+  //   params.append('grant_type', 'client_credentials');
+  //   const res = await axios({
+  //     method:"post",
+  //     url:"https://apitest.acme.com/oauth/token",
+  //     headers:{
+  //       "Content-type":"application/x-www-form-urlencoded;charset=utf-8",
+  //       "Authorization":"Basic 880767493513-ried2fter5tut31am250f867tgv7ms14.apps.googleusercontent.com",
+  //     },
+  //     data:params, 
+  //   })
+  //   .then(data => data.data)
+  //   .catch(err => console.log(err));
+  // }
 
   return(
     <div className="
-      fixed right-6 bottom-6 md:static
+      fixed right-6 bottom-6 md:static md:mb-96
       w-16 h-16 md:w-20 md:h-20 rounded-full flex justify-center items-center
       border border-gray-300"
     >

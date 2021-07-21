@@ -36,4 +36,31 @@
 .text-black{
     color:#202124 !important;
 }
-  
+
+.ck-content{
+  font-family: 'noto-light';
+}
+.ck-content h1{
+  font-family: 'noto-bold';
+  font-size:3rem;
+  font-weight: bold;
+}
+.ck-content h2{
+  font-family: 'noto-bold';
+  font-size:2rem;
+  font-weight: bold;
+}
+.ck-content h3{
+  font-family: 'noto-bold';
+  font-size:1.5rem;
+  font-weight: bold;
+}
+.ck-content h4{
+  font-family: 'noto-bold';
+  font-size:1.3rem;
+  font-weight: bold;
+}
+/* .ck-content li{
+  list-style-type: circle;
+}
+   */

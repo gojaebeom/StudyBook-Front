@@ -22,7 +22,7 @@ function KakaoLogin({ location, setIsLogin }){
     })
     .then(data => data.data)
     .catch(err => console.log(err));
-
+    console.log(res);
     setIsLogin(true);
   });
 

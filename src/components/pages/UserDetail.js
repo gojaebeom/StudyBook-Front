@@ -1,7 +1,7 @@
-import Header from "../Header";
+
 
 export default function UserDetail(){
   return(
-  <Header isCanBack/>
+  <div>회원</div>
   )
 }

@@ -39,6 +39,8 @@
 
 .ck-content{
   font-family: 'noto-light';
+  min-height: 50vh;
+  margin-bottom:50px;
 }
 .ck-content h1{
   font-family: 'noto-bold';

@@ -1,48 +1,60 @@
+import React from "react";
 import { Route, Switch } from "react-router-dom";
-import LoginButton from "./components/LoginButton";
 import Main from "./components/pages/Main";
 import PostDetail from "./components/pages/PostDetail";
 import KakaoLogin from "./components/pages/KakaoLogin";
-import useLogin from "./hooks/useLogin";
-import LoginButtonContainer from "./components/LoginButtonContainer";
-import LoggedInButton from "./components/LoggedInButton";
 import UserDetail from "./components/pages/UserDetail";
 import PostCreate from "./components/pages/PostCreate";
-import Header from "./components/Header";
+import DefaultLayout from "./components/layouts/DefaultLayout";
+import ErrorLayout from "./components/layouts/ErrorLayout";
+import Error404Img from "./images/404.svg";
+
 
 
 export default function App() {
-
-  const { isLogin, setIsLogin } = useLogin();
-
   return (
-  <div className="App w-full flex justify-center">
-    <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
-      <Header/>
+  <React.Fragment>
       <Switch>
         <Route exact path="/">
-          <Main/>
+          <DefaultLayout>
+            <Main />
+          </DefaultLayout>
         </Route>
         <Route exact path="/posts/create">
-          <PostCreate/>
+          <DefaultLayout>
+            <PostCreate/>
+          </DefaultLayout>
         </Route>
         <Route exact path="/posts/:id">
-          <PostDetail/>
+          <DefaultLayout>
+            <PostDetail/>
+          </DefaultLayout>
         </Route>
         <Route exact path="/users/:id">
-          <UserDetail/>
+          <DefaultLayout>
+            <UserDetail/>
+          </DefaultLayout>
         </Route>
         <Route exact path="/users/kakao/login">
-          <KakaoLogin
-            setIsLogin={setIsLogin}
+          <KakaoLogin />
+        </Route>
+        <Route exact path="/403">
+          <ErrorLayout
+            imagePath={Error404Img}
+            errorMessage="You don't have permission"
+            errorType="403"
+          />
+        </Route>
+        <Route exact path="/*">
+          <ErrorLayout
+            imagePath={Error404Img}
+            errorMessage="Not Found"
+            errorType="404"
           />
         </Route>
       </Switch>
-    </div>
-    <LoginButtonContainer>
-        { isLogin && <LoggedInButton setIsLogin={setIsLogin}/> }
-        { !isLogin && <LoginButton /> }
-    </LoginButtonContainer>
-  </div>
+
+
+  </React.Fragment>
   );
 }

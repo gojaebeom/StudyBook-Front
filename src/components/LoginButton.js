@@ -31,15 +31,19 @@ export default function LoginButton(){
         flex flex-col items-center justify-center">
         <i className="fas fa-user-astronaut text-xl md:text-4xl text-gray-500"></i>
         {/* 카카오 로그인 버튼 */}
-        <a href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`} className="opacity-0 group-hover:opacity-100 absolute -left-7 -top-6 w-11 h-11 
-          rounded-full transition-opacity bg-yellow-200  overflow-hidden flex justify-center items-center border"
+        <a 
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`} 
+          className="opacity-0 group-hover:opacity-100 absolute -left-7 -top-6 w-11 h-11 
+          rounded-full transition-opacity bg-yellow-200  overflow-hidden 
+          flex justify-center items-center border"
         >
           <img src={KakaoImg} alt="kakao img" className="rounded-full"/>
         </a>
 
         {/* 구글 로그인 버튼 */}
-        <div className="opacity-0 group-hover:opacity-100 absolute -right-7 -bottom-6 w-11 h-11 
-        rounded-full border bg-white transition-opacity flex justify-center items-center"
+        <div 
+          className="opacity-0 group-hover:opacity-100 absolute -right-7 -bottom-6 w-11 h-11 
+          rounded-full border bg-white transition-opacity flex justify-center items-center"
           onClick={()=>alert("개발중입니다 😅")}
         >
           <img src={GoogleImg} alt="kakao img" className="w-8/12 h-11/8"/>

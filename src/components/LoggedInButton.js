@@ -1,7 +1,13 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CoverImg from "../images/cover.jpg";
 
-export default function LoggedInButton({ setIsLogin }) {
+export default function LoggedInButton() {
+
+  const dispatch = useDispatch();
+  const logoutHandler = () => 
+    dispatch({type:"IS_LOGGED_OUT"});
+
   return(
     <div className="
       fixed right-6 bottom-6 md:static md:mb-96
@@ -22,7 +28,7 @@ export default function LoggedInButton({ setIsLogin }) {
 
         <Link to="/" title="로그아웃" className="opacity-0 group-hover:opacity-100 absolute -right-7 -bottom-6 w-11 h-11 
         rounded-full border bg-white transition-opacity flex justify-center items-center"
-          onClick={()=>setIsLogin(false)}
+          onClick={logoutHandler}
         >
           <i className="fas fa-sign-out-alt text-xl text-gray-500"></i>
         </Link>

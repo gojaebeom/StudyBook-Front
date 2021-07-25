@@ -1,15 +1,15 @@
 import React from "react";
-import usePost from "../../hooks/usePost";
+import { useSelector } from "react-redux";
 import PostDetailItem from "../PostDetailItem";
 
 export default function PostDetail(){
 
-  const [post, setPost] = usePost();
+  const postDetailState = useSelector(state => state.postDetailReducer);
 
   return(
   <React.Fragment>
     <PostDetailItem
-      item={post}
+      item={postDetailState}
     />
   </React.Fragment>
   );

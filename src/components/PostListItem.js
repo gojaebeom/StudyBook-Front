@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function PostListItem({ item, qouteColor, titleColor }){
+export default function PostListItem({ item, qouteColor, titleColor, profileBorderColor }){
   return(
   <React.Fragment>
   <div className="w-full flex flex-col items-center">
@@ -14,8 +14,8 @@ export default function PostListItem({ item, qouteColor, titleColor }){
       </h1>
       <div className="flex justify-start items-center mb-3">
           {/* 프로필 이미지 */}
-          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
-          mr-3 hover:border-purple-300 transition-all cursor-pointer">
+          <div className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
+          mr-3 hover:${profileBorderColor} transition-all cursor-pointer`}>
               <img className="w-16 h-16 rounded-full" 
                   src={item.profileImg} alt="cover img" />
           </div>

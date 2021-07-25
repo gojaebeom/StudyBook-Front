@@ -2,6 +2,9 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default function PostCreate(){
+
+  
+
   return(
   <div className="w-full">
     <br/>
@@ -16,7 +19,23 @@ export default function PostCreate(){
       editor={ ClassicEditor }
       data="<p>Hello from CKEditor 5!</p>"
       config={{
-          "toolbar":['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'code', 'codeBlock' ]
+          "toolbar":{
+            items: [
+              'heading', '|',
+              'alignment', '|',
+              'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+              'link', '|',
+              'bulletedList', 'numberedList', 'todoList',
+              '-', // break point
+              'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+              'codeBlock', '|',
+              'insertTable', '|',
+              'outdent', 'indent', '|',
+              'uploadImage', 'blockQuote', '|',
+              'undo', 'redo'
+            ],
+            shouldNotGroupWhenFull: true
+          }
         }}
       onReady={ editor => {
           // You can store the "editor" and use when it is needed.

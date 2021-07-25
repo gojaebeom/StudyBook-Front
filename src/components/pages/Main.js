@@ -1,13 +1,14 @@
-import usePosts from "../../hooks/usePosts";
 import PostFilter from "../PostFilter";
 import PostListItem from "../PostListItem";
 
 import PostList from "../PostList";
 import React from "react";
+import { useSelector } from "react-redux";
+
 
 export default function Main(){
 
-  const [posts, setPosts] = usePosts();
+  const postsState = useSelector(state => state.postsReducer);
 
   return(
   <React.Fragment>
@@ -16,20 +17,22 @@ export default function Main(){
     <PostFilter/>
     <PostList>
       {
-        posts.map( (item, index) => {
+        postsState.posts.map( (item, index) => {
           if(index % 2 === 0)
           return <PostListItem
-          key={item.id}
-          item={item}
-          qouteColor="group-hover:text-green-300 text-green-100"
-          titleColor="from-green-400 to-blue-500"
+            key={item.id}
+            item={item}
+            qouteColor="group-hover:text-green-300 text-green-100"
+            titleColor="from-green-400 to-blue-500"
+            profileBorderColor="border-green-300"
           />
           else
           return <PostListItem
-          key={item.id}
-          item={item}
-          qouteColor="group-hover:text-purple-300 text-purple-100"
-          titleColor="from-purple-400 via-pink-500 to-red-500"
+            key={item.id}
+            item={item}
+            qouteColor="group-hover:text-purple-300 text-purple-100"
+            titleColor="from-purple-400 via-pink-500 to-red-500"
+            profileBorderColor="border-purple-300"
           />
         })
       }

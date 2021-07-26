@@ -40,29 +40,24 @@
 .ck-content{
   font-family: 'noto-light';
   min-height: 50vh;
-  margin-bottom:50px;
 }
-.ck-content h1{
+h1{
   font-family: 'noto-bold';
   font-size:3rem;
   font-weight: bold;
 }
-.ck-content h2{
+h2{
   font-family: 'noto-bold';
   font-size:2rem;
   font-weight: bold;
 }
-.ck-content h3{
+h3{
   font-family: 'noto-bold';
   font-size:1.5rem;
   font-weight: bold;
 }
-.ck-content h4{
+h4{
   font-family: 'noto-bold';
   font-size:1.3rem;
   font-weight: bold;
 }
-/* .ck-content li{
-  list-style-type: circle;
-}
-   */

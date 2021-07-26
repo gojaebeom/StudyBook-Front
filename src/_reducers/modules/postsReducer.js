@@ -26,8 +26,9 @@ const postsState = {
 
 export default function postsReducer(state=postsState, action){
   switch( action.type ) {
-    case "SET_POSTS_STATE" :
-        return action.payload;
+    case "PUSH_POST" :
+        const newArray = postsState.posts.concat(action.payload);
+        return {...postsState, posts: newArray};
     default : 
         return state;
   }

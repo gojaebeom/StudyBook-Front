@@ -1,9 +1,24 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function PostCreate(){
 
-  
+  const dispatch = useDispatch();
+
+  const [post, setPost] = useState(    {
+    id:1,
+    title: "",
+    profileImg: "",
+    nickname: "",
+    publishedAt: "",
+    content: ""
+  },);
+
+  const createButtonHandler = () => {
+    dispatch({ type: "PUSH_POST", payload: post });
+  }
 
   return(
   <div className="w-full">
@@ -12,12 +27,14 @@ export default function PostCreate(){
     <input 
       className="font-noto-black outline-none text-5xl text-black"
       placeholder="New Post title here..."
+      onChange={ (e) => {
+        setPost({...post, title: e.target.value });
+      } }
     />
     <br/>
     <br/>
     <CKEditor
       editor={ ClassicEditor }
-      data="<p>Hello from CKEditor 5!</p>"
       config={{
           "toolbar":{
             items: [
@@ -25,33 +42,23 @@ export default function PostCreate(){
               'alignment', '|',
               'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
               'link', '|',
-              'bulletedList', 'numberedList', 'todoList',
-              '-', // break point
-              'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
-              'codeBlock', '|',
-              'insertTable', '|',
-              'outdent', 'indent', '|',
-              'uploadImage', 'blockQuote', '|',
-              'undo', 'redo'
+              'bulletedList', 'numberedList', 'todoList'
             ],
             shouldNotGroupWhenFull: true
           }
         }}
-      onReady={ editor => {
-          // You can store the "editor" and use when it is needed.
-          console.log( 'Editor is ready to use!', editor );
-      } }
       onChange={ ( event, editor ) => {
           const data = editor.getData();
-          console.log( { event, editor, data } );
+          setPost({...post, content: data});
       } }
-      onBlur={ ( event, editor ) => {
-          console.log( 'Blur.', editor );
-      } }
-      onFocus={ ( event, editor ) => {
-          console.log( 'Focus.', editor );
-      } }
-  />
+    />
+    <br/>
+    <button
+      onClick={createButtonHandler} 
+      className="border-none rounded-lg bg-blue-500 w-full h-12 font-noto-regular text-lg text-white">
+      생성
+    </button>
+
   </div>
   );
 }

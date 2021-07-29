@@ -9,16 +9,18 @@ export default function DefaultLayout({ children }){
   const loginState = useSelector(state => state.loginReducer)
 
   return(
-  <div className="App w-full flex justify-center">
-      <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
-        <Header/>
-        <br/>
-        { children }
-      </div>
-      <LoginButtonContainer>
-        { loginState && <LoggedInButton /> }
-        { !loginState && <LoginButton /> }
-      </LoginButtonContainer>
+  <div className="App w-full flex flex-col items-center">
+    <Header/>
+    <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
+      
+      <br/>
+      { children }
+    </div>
+    <LoginButtonContainer>
+      { loginState && <LoggedInButton /> }
+      { !loginState && <LoginButton /> }
+    </LoginButtonContainer>
+
   </div>
   );
 }

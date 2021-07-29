@@ -17,7 +17,7 @@ function KakaoLogin({ location }){
     params.append('redirect_uri', process.env.REACT_APP_KAKAO_REDIRECT_URL);
     params.append('code', code);
 
-    await axios({
+    const res = await axios({
       method:"post",
       url:"https://kauth.kakao.com/oauth/token",
       headers:{
@@ -27,6 +27,8 @@ function KakaoLogin({ location }){
     })
     .then(data => data.data)
     .catch(err => console.log(err));
+
+    console.log(res);
 
     dispatch({type: "IS_LOGGED_IN"});
   });

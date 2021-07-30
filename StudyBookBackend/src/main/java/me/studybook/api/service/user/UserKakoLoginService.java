@@ -4,14 +4,16 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.studybook.api.domain.User;
 import me.studybook.api.dto.res.ResUserLoginDto;
-import me.studybook.api.repo.UserRepo;
+import me.studybook.api.repo.user.UserRepo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Service
 @Transactional
 @AllArgsConstructor
+@Slf4j
 public class UserKakoLoginService {
 
     private UserRepo userRepository;
@@ -36,12 +39,12 @@ public class UserKakoLoginService {
          *  로 만들고 책벌레[ 중복되지 않는 숫자 ]
          *  라는 닉네임을 발급하여 회원 등록 후 토큰 발급
          */
-        String kakaoProviderId = getKakaoUserId(accessToken);
+        String kakaoProviderId = requestKakaoUserInfo(accessToken);
         if(!isJoined(kakaoProviderId)){
-            System.out.println("비회원, 회원가입 먼저 진행");
+            log.info("비회원, 회원가입 먼저 진행");
             joinUser(kakaoProviderId, getLastUserId());
         }
-        System.out.println("로그인 진행");
+        log.info("로그인 진행");
 
         User user = userRepository.findUserByProviderId(kakaoProviderId);
         String[] tokens = createJWTToken(user.getId());
@@ -62,6 +65,7 @@ public class UserKakoLoginService {
                 .claim("id", userId)
                 .signWith(SignatureAlgorithm.HS256, "secret")
                 .compact();
+
         String refreshToken = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer("refresh")
@@ -76,10 +80,11 @@ public class UserKakoLoginService {
     }
 
     private void joinUser(String username, Long lastUserId) throws Exception {
-        String defaultNickname = "책벌레";
+        final String DEFAULT_NICKNAME = "책벌레";
+        System.out.println(lastUserId+1);
         User user = User.builder()
                 .username(username)
-                .nickname(defaultNickname+(lastUserId+1))
+                .nickname( DEFAULT_NICKNAME + (lastUserId+1) )
                 .build();
         userRepository.save(user);
     }
@@ -95,13 +100,18 @@ public class UserKakoLoginService {
         return true;
     }
 
-    private String getKakaoUserId(String accessToken) {
+    private String requestKakaoUserInfo(String accessToken) throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization","Bearer "+accessToken);
         headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
         HttpEntity entity = new HttpEntity(headers);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Map> resultMap = restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, entity, Map.class);
+        ResponseEntity<Map> resultMap;
+        try{
+            resultMap = restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, entity, Map.class);
+        }catch (HttpClientErrorException e){
+            throw new Exception(e.getMessage());
+        }
         String kakaoUserId = "KAKAO."+resultMap.getBody().get("id").toString();
         System.out.println(kakaoUserId);
         return kakaoUserId;

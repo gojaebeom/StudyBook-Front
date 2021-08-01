@@ -1,6 +1,6 @@
 package me.studybook.api.config;
 
-import me.studybook.api.interceptor.TokenValidation;
+import me.studybook.api.interceptor.TokenValidationIC;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -9,8 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenValidation())
+        registry.addInterceptor(new TokenValidationIC())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/users/kakao-login");
+
+
     }
 }

@@ -11,12 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.BindException;
 
 @Slf4j
-public class TokenValidation implements HandlerInterceptor {
+public class TokenValidationIC implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("토큰 유효성 검사 인터셉터");
 
         String includeTokenString = request.getHeader("Authorization");
+        System.out.println(includeTokenString);
+        if(includeTokenString == null){
+            throw new Exception("PERMISSION_NOT_DEFINE");
+        }
         log.info(includeTokenString);
         String token = includeTokenString.split("bearer ")[1];
 

@@ -4,6 +4,8 @@ import PostListItem from "../PostListItem";
 import PostList from "../PostList";
 import React from "react";
 import { useSelector } from "react-redux";
+import DefaultLayout from "../layouts/DefaultLayout";
+import TopTagList from "../TopTagList";
 
 
 export default function Main(){
@@ -11,11 +13,12 @@ export default function Main(){
   const postsState = useSelector(state => state.postsReducer);
 
   return(
-  <React.Fragment>
-    <br/>
-    {/* <PostSearch/> */}
-    <PostFilter/>
-    <PostList>
+  <DefaultLayout
+    left={
+      <PostFilter/>
+    }
+    main={
+      <PostList>
       {
         postsState.posts.map( (item, index) => {
           if(index % 2 === 0)
@@ -37,6 +40,10 @@ export default function Main(){
         })
       }
     </PostList>
-  </React.Fragment>
+    }
+    right={
+      <TopTagList/>
+    }
+  /> 
   );
 }

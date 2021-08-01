@@ -6,39 +6,68 @@ export default function PostListItem({ item, qouteColor, titleColor, profileBord
   return(
   <React.Fragment>
   <div className="w-full flex flex-col items-center">
-    <div className="group relative w-full p-6 ">
-      <i className={`fas fa-quote-left ${qouteColor} text-5xl  transition-all`}></i>
-      <h1 className={`font-noto-black text-4xl 
-      bg-gradient-to-r ${titleColor}
-      bg-clip-text text-transparent mb-3`}>
-          {item.title}
-      </h1>
-      <div className="flex justify-start items-center mb-3">
-          {/* 프로필 이미지 */}
-          <div className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
-          mr-3 hover:${profileBorderColor} transition-all cursor-pointer`}>
-              <img className="w-16 h-16 rounded-full" 
-                  src={item.profileImg ? item.profileImg : CoverImg} alt="cover img" />
-          </div>
-          <div className="flex flex-col font-noto-medium text-2xl ">
-              <div className="font-noto-medium text-black text-2xl">
-                {item.nickname}
-              </div>
-              <div className="font-noto-regular text-lg text-gray-500">
-                {item.publishedAt}
-              </div>
-          </div>
-      </div>
-      <Link to="/posts/1" className="font-noto-regular text-xl text-gray-600 group-hover:text-black">
-        <div dangerouslySetInnerHTML={{ __html: item.content }} className=" 
-          max-h-28 overflow-y-hidden overflow-ellipsis break-all
-          transition-all">
-        </div>
-        <span className="text-base">...더보기</span>
+    <div className="group relative w-full p-7">
+
+      <i className={`fas fa-quote-left ${qouteColor} text-3xl  transition-all`}></i>
+      <Link to="/posts/1">
+        <h1 className={`font-noto-black text-4xl 
+        bg-gradient-to-r ${titleColor}
+        bg-clip-text text-transparent mb-3`}>
+            {item.title}
+        </h1>
       </Link>
+
+      <div className="w-full flex justify-start">
+        <div className="flex justify-start items-center mb-3">
+            {/* 프로필 이미지 */}
+            <div className={`w-14 h-14 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
+            mr-3 hover:${profileBorderColor} transition-all cursor-pointer`}>
+                <img className="w-11 h-11 rounded-full" 
+                    src={item.profileImg ? item.profileImg : CoverImg} alt="cover img" />
+            </div>
+            <div className="flex flex-col font-noto-medium">
+                <div className="font-noto-medium text-black text-xl">
+                  {item.nickname}
+                </div>
+                <div className="font-noto-regular text-base text-gray-500">
+                  {item.publishedAt}
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div className="flex">
+        <Link to="/" className="mr-2">
+          <span className="text-gray-500 mr-1">#</span> 
+          <span className="text-gray-600 font-bold">javascript</span>
+        </Link>
+        <Link to="/" className="mr-2">
+          <span className="text-gray-500 mr-1">#</span> 
+          <span className="text-gray-600 font-bold">javascript</span>
+        </Link>
+        <Link to="/" className="mr-2">
+          <span className="text-gray-500 mr-1">#</span> 
+          <span className="text-gray-600 font-bold">javascript</span>
+        </Link>
+      </div>
+
+      <div className="flex mt-2">
+        <Link to="/" className="py-1 px-3 hover:bg-gray-50 transition-all rounded-md font-noto-thin">
+          <i className="far fa-heart mr-2"></i>
+          <span>아직 관심받지 못했어요</span>
+        </Link>
+        <Link to="/" className="py-1 px-3 hover:bg-gray-50 transition-all rounded-md font-noto-thin">
+          <i className="far fa-comments mr-2"></i>
+          <span>댓글을 달아주세요</span>
+        </Link>
+      </div>
     </div>
+
+    {/* <div className="w-full flex justify-center my-10">
+        <div className="border-b w-4/12 "></div>
+    </div> */}
   </div>
-  <div className="relative w-1/2 border-b  my-10"></div>
   </React.Fragment>
   );
 }

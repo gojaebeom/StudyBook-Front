@@ -33,6 +33,10 @@
     src: url(./fonts/Pacifico-Regular.ttf);
 }
 
+/* body{
+  background-color: #FAFAFA;
+} */
+
 .text-black{
     color:#202124 !important;
 }

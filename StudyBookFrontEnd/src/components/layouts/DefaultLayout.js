@@ -1,26 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Header from "../Header";
-import LoggedInButton from "../LoggedInButton";
-import LoginButton from "../LoginButton";
-import LoginButtonContainer from "../LoginButtonContainer";
 
-export default function DefaultLayout({ children }){
+export default function DefaultLayout({ left, main, right }){
 
-  const loginState = useSelector(state => state.loginReducer)
+  const dispatch = useDispatch();
+  const clickHandler = (e) => {
+    let el = e.target;
+    const target = document.querySelector("#loggedin-toggle");
+    while(el){
+      el = el.parentNode;
+      if(el === target){
+        return;
+      }
+      if(el.nodeName === "BODY"){
+        break;
+      }
+    }
+    dispatch({type:"CLOSE_LOGGEDIN_MENU"});
+  }
 
   return(
-  <div className="App w-full flex flex-col items-center">
+  <div className="App w-full flex flex-col items-center"
+    onClick={clickHandler}
+  >
     <Header/>
-    <div className="relative w-full md:w-700 h-screen flex flex-col items-center z-10">
-      
-      <br/>
-      { children }
+    <div className="w-full flex justify-center">
+      <div className="relative hidden lg:w-80 h-screen md:flex flex-col items-end ">
+        { left }
+      </div>
+      <div className="relative w-full lg:w-700 h-screen flex flex-col items-center lg:border-l lg:border-r">
+        { main }
+      </div>
+      <div className="relative hidden lg:w-80 h-screen md:flex flex-col items-start">
+        { right }
+      </div>
     </div>
-    <LoginButtonContainer>
-      { loginState && <LoggedInButton /> }
-      { !loginState && <LoginButton /> }
-    </LoginButtonContainer>
-
   </div>
   );
 }

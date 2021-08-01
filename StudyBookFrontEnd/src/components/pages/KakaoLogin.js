@@ -17,7 +17,7 @@ function KakaoLogin({ location }){
     params.append('redirect_uri', process.env.REACT_APP_KAKAO_REDIRECT_URL);
     params.append('code', code);
 
-    const res = await axios({
+    const kakaoRes = await axios({
       method:"post",
       url:"https://kauth.kakao.com/oauth/token",
       headers:{
@@ -28,7 +28,21 @@ function KakaoLogin({ location }){
     .then(data => data.data)
     .catch(err => console.log(err));
 
-    console.log(res);
+    console.log(kakaoRes.access_token);
+
+    const studybookRes = await axios({
+      method:"post",
+      url:"http://localhost:8080/api/users/kakao-login",
+      withCredentials:true,
+      headers:{
+        "Content-Type":"application/json",
+      },
+      data:{"accessToken":kakaoRes.access_token}, 
+    })
+    .then(data => data.data)
+    .catch(err => console.log(err));
+
+    console.log(studybookRes);
 
     dispatch({type: "IS_LOGGED_IN"});
   });

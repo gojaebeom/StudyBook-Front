@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import Header from "../Header";
 
-export default function DefaultLayout({ left, main, right }){
+export default function DefaultLayout({ left, main, right, border }){
 
   const dispatch = useDispatch();
   const clickHandler = (e) => {
@@ -28,7 +28,7 @@ export default function DefaultLayout({ left, main, right }){
       <div className="relative hidden lg:w-80 h-screen md:flex flex-col items-end ">
         { left }
       </div>
-      <div className="relative w-full lg:w-700 h-screen flex flex-col items-center lg:border-l lg:border-r">
+      <div className={`relative w-full lg:w-700 h-screen flex flex-col items-center ${border && "lg:border-l lg:border-r"} `}>
         { main }
       </div>
       <div className="relative hidden lg:w-80 h-screen md:flex flex-col items-start">

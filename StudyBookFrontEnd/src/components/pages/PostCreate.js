@@ -1,37 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import DefaultLayout from "../../components/layouts/DefaultLayout";
+import 'prismjs/themes/prism.css';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 
-import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
 
 
 export default function PostCreate(){
 
+  const editorRef = useRef();
+
   const dispatch = useDispatch();
 
   const [post, setPost] = useState({
-    id:1,
     title: "",
-    profileImg: "",
-    nickname: "",
-    publishedAt: "",
-    content: ""
+    content: "",
   });
 
-  useEffect(() => {
-    new Editor({
-      el: document.querySelector('#editor'),
-      height: '600px',
-      initialEditType: 'wysiwyg',
-      previewStyle: 'vertical'
-    });
-  },[]);
-
   const createButtonHandler = () => {
-    dispatch({ type: "PUSH_POST", payload: post });
+    const content = editorRef.current.getRootElement().querySelector(".toastui-editor-contents").outerHTML;
   }
-
 
   return(
   <DefaultLayout
@@ -48,7 +39,17 @@ export default function PostCreate(){
         />
         <br/>
         <br/>
-        <div id="editor"></div>
+        <Editor
+          plugins={
+            [codeSyntaxHighlight]
+          }
+          initialValue="hello react editor world!"
+          previewStyle="vertical"
+          height="600px"
+          initialEditType="markdown"
+          useCommandShortcut={true}
+          ref={editorRef}
+        />
         <br/>
         <button
           onClick={createButtonHandler} 

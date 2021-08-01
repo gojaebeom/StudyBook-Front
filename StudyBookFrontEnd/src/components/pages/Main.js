@@ -14,6 +14,7 @@ export default function Main(){
 
   return(
   <DefaultLayout
+    border
     left={
       <PostFilter/>
     }

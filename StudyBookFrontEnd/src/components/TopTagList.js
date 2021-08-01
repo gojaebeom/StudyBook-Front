@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function TopTagList(){
   return(
-  <div className="flex flex-col items-start w-60 mt-10 ml-5">
+  <div className="flex flex-col items-start w-full mt-10 ml-3">
     <div className="font-noto-bold text-xl text-gray-500 mb-2">
       인기 태그
     </div>

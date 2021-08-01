@@ -8,6 +8,7 @@ import PostCreate from "./components/pages/PostCreate";
 import DefaultLayout from "./components/layouts/DefaultLayout";
 import ErrorLayout from "./components/layouts/ErrorLayout";
 import Error404Img from "./images/404.svg";
+import Login from "./components/pages/Login";
 
 
 
@@ -27,20 +28,17 @@ export default function App() {
       <Route path="/sort/random">
         <Main/>
       </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
       <Route exact path="/posts/create">
-        <DefaultLayout>
-          <PostCreate/>
-        </DefaultLayout>
+        <PostCreate/>
       </Route>
       <Route exact path="/posts/:id">
-        <DefaultLayout>
-          <PostDetail/>
-        </DefaultLayout>
+        <PostDetail/>
       </Route>
       <Route exact path="/users/:id">
-        <DefaultLayout>
-          <UserDetail/>
-        </DefaultLayout>
+        <UserDetail/>
       </Route>
       <Route exact path="/users/kakao/login">
         <KakaoLogin />

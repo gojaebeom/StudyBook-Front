@@ -55,7 +55,7 @@ export default function PostListItem({ item, qouteColor, titleColor, profileBord
       <div className="flex mt-2">
         <Link to="/" className="py-1 px-3 hover:bg-gray-50 transition-all rounded-md font-noto-thin">
           <i className="far fa-heart mr-2"></i>
-          <span>아직 관심받지 못했어요</span>
+          <span>무관심</span>
         </Link>
         <Link to="/" className="py-1 px-3 hover:bg-gray-50 transition-all rounded-md font-noto-thin">
           <i className="far fa-comments mr-2"></i>

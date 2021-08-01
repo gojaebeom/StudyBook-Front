@@ -1,7 +1,12 @@
+import DefaultLayout from "../layouts/DefaultLayout";
 
 
 export default function UserDetail(){
   return(
-  <div>회원</div>
+  <DefaultLayout
+    main={
+      <div>회원</div>
+    }
+  />
   )
 }

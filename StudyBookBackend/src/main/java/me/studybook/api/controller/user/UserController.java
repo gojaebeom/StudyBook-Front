@@ -9,7 +9,10 @@ import me.studybook.api.service.user.UserDestoryService;
 import me.studybook.api.service.user.UserKakoLoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +26,7 @@ public class UserController {
     private UserDestoryService userDestoryService;
 
     @PostMapping("/kakao-login")
-    public ResponseEntity kakaoLogin(@RequestBody Map<String,String> loginDto) throws Exception {
+    public ResponseEntity kakaoLogin(@RequestBody Map<String,String> loginDto, HttpServletResponse response) throws Exception {
         log.info("loginDto", loginDto);
         /**
          * 발급 받은 엑세스토큰을 서비스로 전달
@@ -33,10 +36,32 @@ public class UserController {
         ResUserLoginDto userLoginDto = userKakoLoginService.kakaoLogin(loginDto.get("accessToken"));
         System.out.println(userLoginDto);
 
+
+
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", "login success!");
         responses.put("status", 200);
-        responses.put("tokens", userLoginDto);
+
+        /**
+         * create a cookie
+         * expires in 7 days
+         */
+        Cookie actCookie = new Cookie("act",userLoginDto.getAccessToken());
+        actCookie.setMaxAge(7 * 24 * 60 * 60);
+//        actCookie.setSecure(true);
+        actCookie.setHttpOnly(true);
+        actCookie.setPath("/");
+
+        Cookie rftCookie = new Cookie("rft",userLoginDto.getRefreshToken());
+        rftCookie.setMaxAge(7 * 24 * 60 * 60);
+//        rftCookie.setSecure(true);
+        rftCookie.setHttpOnly(true);
+        rftCookie.setPath("/");
+
+
+        response.addCookie(actCookie);
+        response.addCookie(rftCookie);
+        log.info("쿠키 설정 완료");
 
         return ResponseEntity.ok().body(responses);
     }

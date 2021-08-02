@@ -15,6 +15,8 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity exceptionHandler(Exception e) {
 
+        System.out.println(e.getMessage());
+
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", e.getMessage());
         responses.put("status", 500);

@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.BindException;
@@ -16,13 +17,21 @@ public class TokenValidationIC implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("토큰 유효성 검사 인터셉터");
 
-        String includeTokenString = request.getHeader("Authorization");
-        System.out.println(includeTokenString);
-        if(includeTokenString == null){
+        String token = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for(Cookie c : cookies) {
+                System.out.println(c.getName());
+                System.out.println(c.getValue());
+                if(c.getName().equals("act")){
+                    token = c.getValue();
+                }
+            }
+        }
+
+        if(token == null){
             throw new Exception("PERMISSION_NOT_DEFINE");
         }
-        log.info(includeTokenString);
-        String token = includeTokenString.split("bearer ")[1];
 
         try{
             Claims data = Jwts.parser()

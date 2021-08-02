@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @AllArgsConstructor
-public class H2UserRepo implements UserRepo {
+public class UserRepoImpl implements UserRepo {
 
     private EntityManager entityManager;
 
@@ -34,6 +34,11 @@ public class H2UserRepo implements UserRepo {
             return null;
         }
         return users.get(0);
+    }
+
+    @Override
+    public User findUserById(Long userId) throws Exception {
+        return entityManager.find(User.class, userId);
     }
 
     @Override

@@ -7,6 +7,8 @@ public interface UserRepo {
 
     User findUserByProviderId(String provideId) throws Exception;
 
+    User findUserById(Long userId) throws Exception;
+
     void save(User user) throws Exception;
 
     void remove(Long userId) throws Exception;

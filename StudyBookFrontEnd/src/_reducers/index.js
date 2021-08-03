@@ -4,6 +4,7 @@ import loggedinMenuReducer from "./modules/loggedinMenuReducer";
 import postsReducer from "./modules/postsReducer";
 import postDetailReducer from "./modules/postDetailReducer";
 import postFilterReducer from "./modules/postFilterReducer";
+import postCreateModalReducer from "./modules/postCreateModalReducer";
 
 
 const mainReducer = combineReducers({
@@ -11,6 +12,7 @@ const mainReducer = combineReducers({
   postsReducer,
   postDetailReducer,
   postFilterReducer,
-  loggedinMenuReducer
+  loggedinMenuReducer,
+  postCreateModalReducer
 });
 export default mainReducer;

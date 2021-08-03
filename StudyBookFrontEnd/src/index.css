@@ -41,27 +41,17 @@
     color:#202124 !important;
 }
 
-.ck-content{
-  font-family: 'noto-light';
-  min-height: 50vh;
+.toastui-editor-contents{
+  font-family: 'noto-light' !important;
 }
-h1{
-  font-family: 'noto-bold';
-  font-size:3rem;
-  font-weight: bold;
+.toastui-editor-contents h2{
+  font-size:2rem !important;
+  padding-bottom:1.5rem !important;
+  padding-top:1.5rem !important;
 }
-h2{
-  font-family: 'noto-bold';
-  font-size:2rem;
-  font-weight: bold;
+.toastui-editor-contents h3{
+  font-size:1.5rem !important;
 }
-h3{
-  font-family: 'noto-bold';
-  font-size:1.5rem;
-  font-weight: bold;
-}
-h4{
-  font-family: 'noto-bold';
-  font-size:1.3rem;
-  font-weight: bold;
+.toastui-editor-contents p{
+  font-size:1.2rem !important;
 }

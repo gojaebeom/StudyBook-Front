@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostCreateModal from '../PostCreateModal';
 
@@ -16,39 +16,47 @@ export default function PostCreate(){
   const editorRef = useRef();
 
   const dispatch = useDispatch();
-  const modalState = useSelector(state => state.postCreateModalReducer);
-
-  const [post, setPost] = useState({
-    title: "",
-    content: "",
-  });
+  const postCrateState = useSelector(state => state.postCreateReducer);
 
   const createButtonHandler = () => {
     const content = editorRef.current.getRootElement().querySelector(".toastui-editor-contents").outerHTML;
 
+    dispatch({type:"POST_CREATE_STATE_CHANGE", payload:{...postCrateState, content: content}});
     dispatch({type:"POST_CREATE_MODAL_TOGGLE"});
+  }
+
+  const changeInputHandler = (e) => {
+    let value = e.target.value;
+    const name = e.target.name;
+    console.log(value);
+    if(name === "title"){
+      dispatch({type:"POST_CREATE_STATE_CHANGE", payload: {...postCrateState, title: value}});
+    }
+    else if(name === "tags"){
+      const tags = value.split(",");
+      console.log(tags);
+      dispatch({type:"POST_CREATE_STATE_CHANGE", payload: {...postCrateState, tags: tags}});
+    }
   }
 
   return(
   <div className="w-full min-h-screen flex justify-center">
     {
-      !modalState ?
+      !postCrateState.open ?
       <div className="w-full lg:w-6/12">
         <br/>
         <br/>
         <input 
+          name="title"
           className="w-full p-2 mb-5 font-noto-bold outline-none text-4xl text-gray-700"
           placeholder="제목을 입력하세요"
-          onChange={ (e) => {
-            setPost({...post, title: e.target.value });
-          } }
+          onChange={changeInputHandler}
         />
         <input 
+          name="tags"
           className="w-full p-2 mb-5 font-noto-medium outline-none text-xl text-gray-500"
           placeholder="태그( 쉼표로 구분 )"
-          onChange={ (e) => {
-            setPost({...post, title: e.target.value });
-          } }
+          onChange={changeInputHandler}
         />
         <Editor
           plugins={

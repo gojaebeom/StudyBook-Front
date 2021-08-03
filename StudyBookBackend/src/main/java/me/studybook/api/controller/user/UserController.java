@@ -40,6 +40,7 @@ public class UserController {
 
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", "login success!");
+        responses.put("message", "login success!");
         responses.put("status", 200);
 
         /**
@@ -48,13 +49,13 @@ public class UserController {
          */
         Cookie actCookie = new Cookie("act",userLoginDto.getAccessToken());
         actCookie.setMaxAge(7 * 24 * 60 * 60);
-//        actCookie.setSecure(true);
+        actCookie.setSecure(true);
         actCookie.setHttpOnly(true);
         actCookie.setPath("/");
 
         Cookie rftCookie = new Cookie("rft",userLoginDto.getRefreshToken());
         rftCookie.setMaxAge(7 * 24 * 60 * 60);
-//        rftCookie.setSecure(true);
+        rftCookie.setSecure(true);
         rftCookie.setHttpOnly(true);
         rftCookie.setPath("/");
 

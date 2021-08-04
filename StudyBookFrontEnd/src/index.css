@@ -8,26 +8,32 @@
     font-family: 'noto-black';
     src: url(./fonts/NotoSansKR-Black.otf);
 }
+
 @font-face {
     font-family: 'noto-bold';
     src: url(./fonts/NotoSansKR-Bold.otf);
 }
+
 @font-face {
     font-family: 'noto-medium';
     src: url(./fonts/NotoSansKR-Medium.otf);
 }
+
 @font-face {
     font-family: 'noto-regular';
     src: url(./fonts/NotoSansKR-Regular.otf);
 }
+
 @font-face {
     font-family: 'noto-light';
     src: url(./fonts/NotoSansKR-Light.otf);
 }
+
 @font-face {
     font-family: 'noto-thin';
     src: url(./fonts/NotoSansKR-Thin.otf);
 }
+
 @font-face {
     font-family: 'pacifico';
     src: url(./fonts/Pacifico-Regular.ttf);
@@ -37,21 +43,24 @@
   background-color: #FAFAFA;
 } */
 
-.text-black{
-    color:#202124 !important;
+.text-black {
+    color: #202124 !important;
 }
 
-.toastui-editor-contents{
-  font-family: 'noto-light' !important;
+.toastui-editor-contents {
+    font-family: 'noto-light' !important;
 }
-.toastui-editor-contents h2{
-  font-size:2rem !important;
-  padding-bottom:1.5rem !important;
-  padding-top:1.5rem !important;
+
+.toastui-editor-contents h2 {
+    font-size: 2rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-top: 1.5rem !important;
 }
-.toastui-editor-contents h3{
-  font-size:1.5rem !important;
+
+.toastui-editor-contents h3 {
+    font-size: 1.5rem !important;
 }
-.toastui-editor-contents p{
-  font-size:1.2rem !important;
+
+.toastui-editor-contents p {
+    font-size: 1.2rem !important;
 }

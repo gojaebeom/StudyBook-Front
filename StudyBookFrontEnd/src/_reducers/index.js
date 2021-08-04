@@ -1,18 +1,18 @@
 import { combineReducers } from "redux";
-import loginReducer from "./modules/loginReducer";
-import loggedinMenuReducer from "./modules/loggedinMenuReducer";
-import postsReducer from "./modules/postsReducer";
-import postDetailReducer from "./modules/postDetailReducer";
-import postFilterReducer from "./modules/postFilterReducer";
-import postCreateReducer from "./modules/postCreateReducer";
+import login from "./modules/login";
+import loggedInMenu from "./modules/loggedInMenu";
+import posts from "./modules/posts";
+import postDetail from "./modules/postDetail";
+import postFilter from "./modules/postFilter";
+import postCreate from "./modules/postCreate";
 
 
 const mainReducer = combineReducers({
-  loginReducer,
-  postsReducer,
-  postDetailReducer,
-  postFilterReducer,
-  loggedinMenuReducer,
-  postCreateReducer
+    login,
+    posts,
+    postDetail,
+    postFilter,
+    loggedInMenu,
+    postCreate
 });
 export default mainReducer;

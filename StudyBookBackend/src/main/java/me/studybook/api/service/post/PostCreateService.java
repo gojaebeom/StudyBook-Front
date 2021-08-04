@@ -1,6 +1,7 @@
 package me.studybook.api.service.post;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.studybook.api.domain.*;
 import me.studybook.api.dto.req.ReqPostCreateDto;
 import me.studybook.api.repo.post.PostCategoryRepo;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 @AllArgsConstructor
+@Slf4j
 public class PostCreateService {
 
     private PostRepo postRepo;
@@ -35,10 +37,23 @@ public class PostCreateService {
         List<Tag> tags = postCreateDto.toTags();
         List<PostTag> postTags =  postCreateDto.toPostTags(post, tags);
 
-        postCategoryRepo.create(postCategory);
+        if(validateCategory(postCategory)){
+            // 없는 카테고리
+            log.info("새로운 카테고리 생성");
+            createCategory(postCategory);
+        }
+
         postRepo.create(post);
         tagRepo.create(tags);
         postTagRepo.create(postTags);
+    }
+
+    private void createCategory(PostCategory postCategory) throws Exception {
+        postCategoryRepo.create(postCategory);
+    }
+
+    private Boolean validateCategory(PostCategory postCategory) throws Exception {
+        return postCategoryRepo.validateByUserIdAndName(postCategory.getUser().getId(), postCategory.getName());
     }
 
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.BindException;
+import java.util.Enumeration;
 
 @Slf4j
 public class TokenValidationIC implements HandlerInterceptor {
@@ -17,17 +18,21 @@ public class TokenValidationIC implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("토큰 유효성 검사 인터셉터");
 
-        String token = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for(Cookie c : cookies) {
-                System.out.println(c.getName());
-                System.out.println(c.getValue());
-                if(c.getName().equals("act")){
-                    token = c.getValue();
-                }
-            }
-        }
+//        String token = null;
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//            for(Cookie c : cookies) {
+//                System.out.println(c.getName());
+//                System.out.println(c.getValue());
+//                if(c.getName().equals("act")){
+//                    token = c.getValue();
+//                }
+//            }
+//        }
+
+        String tokenString = request.getHeader("Authorization");
+        System.out.println(tokenString);
+        String token = tokenString.split("bearer ")[1];
 
         if(token == null){
             throw new Exception("PERMISSION_NOT_DEFINE");

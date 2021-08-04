@@ -6,11 +6,11 @@ import CoverImg from "../images/cover.jpg";
 function Header() {
 
     const loginState = useSelector(state => state.login);
-    const loggedinMenuState = useSelector(state => state.loggedinMenu);
+    const loggedInMenuState = useSelector(state => state.loggedInMenu);
     const dispatch = useDispatch();
 
     const toggleModalHandler = () => {
-        dispatch({type: "TOGGLE_LOGGEDIN_MENU", payload: !loggedinMenuState});
+        dispatch({type: "TOGGLE_LOGGEDIN_MENU", payload: !loggedInMenuState});
     }
 
     const logoutHandler = () => {
@@ -30,13 +30,13 @@ function Header() {
             </div>
 
             {
-                !loginState &&
+                !loginState.isLoggedIn &&
                 <div className="font-noto-bold text-lg">
                     <Link to="/login">로그인</Link>
                 </div>
             }
             {
-                loginState &&
+                loginState.isLoggedIn &&
                 <div
                     onClick={toggleModalHandler}
                     id="loggedin-toggle"
@@ -46,10 +46,10 @@ function Header() {
                         <img src={CoverImg} alt="profile img" className="w-full h-full rounded-full"/>
                     </div>
                     <div
-                        className={`${loggedinMenuState ? "flex" : "hidden"} flex-col rounded-sm absolute right-0 -bottom-48 w-40 bg-white border`}>
-                        <Link to="/users/1" className="p-3 border-b">내 정보</Link>
+                        className={`${loggedInMenuState ? "flex" : "hidden"} flex-col rounded-sm absolute right-0 -bottom-48 w-40 bg-white border`}>
+                        <Link to={`/users/${ loginState.userId }`} className="p-3 border-b">내 정보</Link>
                         <Link to="/posts/create" className="p-3 border-b">글 작성</Link>
-                        <Link to="/users/1/update" className="p-3 border-b">내 정보 수정</Link>
+                        <Link to={`/users/${ loginState.userId }/update`} className="p-3 border-b">내 정보 수정</Link>
                         <div
                             onClick={logoutHandler}
                             className="p-3 border-b-2">

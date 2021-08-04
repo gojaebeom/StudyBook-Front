@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CorsIC())
-                .addPathPatterns("/**");
+//        registry.addInterceptor(new CorsIC())
+//                .addPathPatterns("/**");
 
         registry.addInterceptor(new TokenValidationIC())
                 .addPathPatterns("/**")

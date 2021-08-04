@@ -7,8 +7,8 @@ export default function PostCreateModal() {
     const [isNew, setIsNew] = useState(false);
 
     const dispatch = useDispatch();
-
     const postCrateState = useSelector(state => state.postCreate);
+    const loginState = useSelector(state => state.login);
 
     const changeInputHandler = (e) => {
         let value = e.target.value;
@@ -39,19 +39,27 @@ export default function PostCreateModal() {
         }
         formData.append("description", postCrateState.description);
         formData.append("category", postCrateState.category);
-        formData.append("userId", 1);
+        formData.append("userId", loginState.userId);
 
         const res = await axios({
             method: "post",
-            url: "http://localhost:8080/api/posts",
+            url: "/api/posts",
             withCredentials: true,
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Access-Control-Allow-Methods": "POST",
+                "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
+                "Access-Control-Allow-Headers":"Content-Type, Authorization",
+                "Authorization":`bearer ${window.localStorage.getItem("act")}`,
+                "content-Type": "multipart/form-data",
             },
             data: formData,
         })
             .then(data => data.data)
-            .catch(err => console.log(err));
+            .catch(err => {
+                const {message, status} = err.response.data;
+                alert(`CODE: ${status}\n${message}`);
+                throw new Error(message);
+            });
 
         console.log(res);
 

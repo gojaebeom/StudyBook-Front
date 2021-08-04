@@ -42,45 +42,45 @@ export default function PostCreate() {
         <div className="w-full min-h-screen flex justify-center">
             {
                 !postCrateState.open ?
-                    <div className="w-full lg:w-6/12">
-                        <br/>
-                        <br/>
-                        <input
-                            name="title"
-                            className="w-full p-2 mb-5 font-noto-bold outline-none text-4xl text-gray-700"
-                            placeholder="제목을 입력하세요"
-                            onChange={changeInputHandler}
-                        />
-                        <input
-                            name="tags"
-                            className="w-full p-2 mb-5 font-noto-medium outline-none text-xl text-gray-500"
-                            placeholder="태그( 쉼표로 구분 )"
-                            onChange={changeInputHandler}
-                        />
-                        <Editor
-                            plugins={
-                                [codeSyntaxHighlight]
-                            }
-                            // initialValue="hello react editor world!"
-                            previewStyle="vertical"
-                            height="600px"
-                            initialEditType="markdown"
-                            useCommandShortcut={true}
-                            ref={editorRef}
-                        />
-                        <br/>
-                        <div className="w-full flex justify-end ">
-                            <Link to="/"
-                                  className="border-none flex justify-center items-center rounded-sm bg-yellow-500 w-52 h-12 font-noto-regular text-lg text-white mr-5">취소</Link>
-                            <button
-                                onClick={createButtonHandler}
-                                className="border-none rounded-sm bg-indigo-500 w-52 h-12 font-noto-regular text-lg text-white">
-                                생성
-                            </button>
-                        </div>
+                <div className="w-full lg:w-6/12">
+                    <br/>
+                    <br/>
+                    <input
+                        name="title"
+                        className="w-full p-2 mb-5 font-noto-bold outline-none text-4xl text-gray-700"
+                        placeholder="제목을 입력하세요"
+                        onChange={changeInputHandler}
+                    />
+                    <input
+                        name="tags"
+                        className="w-full p-2 mb-5 font-noto-medium outline-none text-xl text-gray-500"
+                        placeholder="태그( 쉼표로 구분 )"
+                        onChange={changeInputHandler}
+                    />
+                    <Editor
+                        plugins={
+                            [codeSyntaxHighlight]
+                        }
+                        // initialValue="hello react editor world!"
+                        previewStyle="vertical"
+                        height="600px"
+                        initialEditType="markdown"
+                        useCommandShortcut={true}
+                        ref={editorRef}
+                    />
+                    <br/>
+                    <div className="w-full flex justify-end ">
+                        <Link to="/"
+                              className="border-none flex justify-center items-center rounded-sm bg-yellow-500 w-52 h-12 font-noto-regular text-lg text-white mr-5">취소</Link>
+                        <button
+                            onClick={createButtonHandler}
+                            className="border-none rounded-sm bg-indigo-500 w-52 h-12 font-noto-regular text-lg text-white">
+                            생성
+                        </button>
                     </div>
-                    :
-                    <PostCreateModal/>
+                </div>
+                :
+                <PostCreateModal/>
             }
         </div>
     );

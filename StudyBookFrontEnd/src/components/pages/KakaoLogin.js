@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 function KakaoLogin({location}) {
 
     const dispatch = useDispatch();
+    const loginState = useSelector(state => state.login);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
@@ -32,7 +34,7 @@ function KakaoLogin({location}) {
 
         const studybookRes = await axios({
             method: "post",
-            url: "http://localhost:8080/api/users/kakao-login",
+            url: "/api/users/kakao-login",
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +46,14 @@ function KakaoLogin({location}) {
 
         console.log(studybookRes);
 
-        dispatch({type: "IS_LOGGED_IN"});
+        const { accessToken, refreshToken } = studybookRes.tokens;
+
+        window.localStorage.setItem("act", accessToken);
+        window.localStorage.setItem("rft", refreshToken);
+        const decoded = jwt_decode(accessToken);
+        console.log(decoded);
+        const { id } = decoded;
+        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: id}});
     });
 
     return <Redirect to="/"/>;

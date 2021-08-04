@@ -1,6 +1,7 @@
 package me.studybook.api.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "post_categories")
 @ToString
 @NoArgsConstructor
+@Getter
 public class PostCategory {
 
     @Id

@@ -20,6 +20,9 @@ public class Post {
     @Column(name = "title", length = 50, nullable = false)
     private String title;
 
+    @Column(name = "description", length = 100)
+    private String description;
+
     @Column(name = "content", columnDefinition="LONGTEXT")
     private String content;
 
@@ -32,9 +35,10 @@ public class Post {
     private PostCategory postCategory;
 
     @Builder
-    public Post(Long id, String title, String content, User user, PostCategory postCategory) {
+    public Post(Long id, String title, String description, String content, User user, PostCategory postCategory) {
         this.id = id;
         this.title = title;
+        this.description = description;
         this.content = content;
         this.user = user;
         this.postCategory = postCategory;

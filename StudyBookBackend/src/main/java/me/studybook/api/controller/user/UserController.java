@@ -36,33 +36,10 @@ public class UserController {
         ResUserLoginDto userLoginDto = userKakoLoginService.kakaoLogin(loginDto.get("accessToken"));
         System.out.println(userLoginDto);
 
-
-
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", "login success!");
-        responses.put("message", "login success!");
+        responses.put("tokens", userLoginDto);
         responses.put("status", 200);
-
-        /**
-         * create a cookie
-         * expires in 7 days
-         */
-        Cookie actCookie = new Cookie("act",userLoginDto.getAccessToken());
-        actCookie.setMaxAge(7 * 24 * 60 * 60);
-        actCookie.setSecure(true);
-        actCookie.setHttpOnly(true);
-        actCookie.setPath("/");
-
-        Cookie rftCookie = new Cookie("rft",userLoginDto.getRefreshToken());
-        rftCookie.setMaxAge(7 * 24 * 60 * 60);
-        rftCookie.setSecure(true);
-        rftCookie.setHttpOnly(true);
-        rftCookie.setPath("/");
-
-
-        response.addCookie(actCookie);
-        response.addCookie(rftCookie);
-        log.info("쿠키 설정 완료");
 
         return ResponseEntity.ok().body(responses);
     }

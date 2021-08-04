@@ -15,6 +15,7 @@ import java.util.List;
 public class ReqPostCreateDto {
     private String title;
     private String content;
+    private String description;
     private String[] tags;
     private String category;
     private Long userId;
@@ -23,6 +24,7 @@ public class ReqPostCreateDto {
         return Post.builder()
                 .title(this.title)
                 .content(this.content)
+                .description(this.description)
                 .user(user)
                 .build();
     }

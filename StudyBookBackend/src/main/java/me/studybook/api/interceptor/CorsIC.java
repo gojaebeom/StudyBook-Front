@@ -17,7 +17,7 @@ public class CorsIC implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Credentials", "true");   // 자격증명
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT"); // 허용 메소드
         response.setHeader("Access-Control-Max-Age", "3600");   // 브라우저 캐시 시간
-        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type, enctype");    // 허용 헤더
+        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type, enctype, Authorization");    // 허용 헤더 X-Requested-With, content-type, enctype, Authentication
 
         return true;
     }

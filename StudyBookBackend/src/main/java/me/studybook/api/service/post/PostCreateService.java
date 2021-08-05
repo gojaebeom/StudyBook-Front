@@ -43,17 +43,17 @@ public class PostCreateService {
             createCategory(postCategory);
         }
 
-        postRepo.create(post);
-        tagRepo.create(tags);
-        postTagRepo.create(postTags);
+        postRepo.save(post);
+        tagRepo.saveAll(tags);
+        postTagRepo.saveAll(postTags);
     }
 
     private void createCategory(PostCategory postCategory) throws Exception {
-        postCategoryRepo.create(postCategory);
+        postCategoryRepo.save(postCategory);
     }
 
     private Boolean validateCategory(PostCategory postCategory) throws Exception {
-        return postCategoryRepo.validateByUserIdAndName(postCategory.getUser().getId(), postCategory.getName());
+        return postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()) >= 0 ? true : false;
     }
 
 }

@@ -1,10 +1,8 @@
 package me.studybook.api.repo.post;
 
 import me.studybook.api.domain.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface PostRepo extends JpaRepository<Post, Long> {
 
-public interface PostRepo {
-    List<Post> findPosts() throws Exception;
-    void create(Post post) throws Exception;
 }

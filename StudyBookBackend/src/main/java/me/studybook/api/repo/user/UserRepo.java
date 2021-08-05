@@ -1,15 +1,16 @@
 package me.studybook.api.repo.user;
 
 import me.studybook.api.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepo {
-    Long findLastUserId() throws Exception;
+public interface UserRepo extends JpaRepository<User, Long> {
 
-    User findUserByProviderId(String provideId) throws Exception;
+    User findUserByUsername(String username) throws Exception;
 
-    User findUserById(Long userId) throws Exception;
+    User findFirstByOrderByIdDesc();
 
-    void save(User user) throws Exception;
+    Long countByUsername(String username) throws Exception;
 
-    void remove(Long userId) throws Exception;
+    User findUserById(Long userId);
 }

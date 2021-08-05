@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.naming.AuthenticationException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +32,14 @@ public class TokenValidationIC implements HandlerInterceptor {
 //        }
 
         String tokenString = request.getHeader("Authorization");
-        System.out.println(tokenString);
+        if(tokenString == null){
+            throw new AuthenticationException("PERMISSION_NOT_DEFINE");
+        }
+
         String token = tokenString.split("bearer ")[1];
 
         if(token == null){
-            throw new Exception("PERMISSION_NOT_DEFINE");
+            throw new AuthenticationException("PERMISSION_NOT_DEFINE");
         }
 
         try{

@@ -1,13 +1,17 @@
 package me.studybook.api.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tags")
+@NoArgsConstructor
 @Getter
+@ToString
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +19,9 @@ public class Tag {
 
     @Column(name = "name", length = 12)
     private String name;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Builder
     public Tag(Long id, String name) {

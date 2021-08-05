@@ -27,7 +27,7 @@ import java.util.Map;
 @Slf4j
 public class UserKakoLoginService {
 
-    private UserRepo userRepository;
+    private UserRepo userRepo;
 
     public ResUserLoginDto kakaoLogin(String accessToken) throws Exception {
         /**
@@ -46,7 +46,7 @@ public class UserKakoLoginService {
         }
         log.info("로그인 진행");
 
-        User user = userRepository.findUserByProviderId(kakaoProviderId);
+        User user = userRepo.findUserByUsername(kakaoProviderId);
         String[] tokens = createJWTToken(user.getId());
 
         return ResUserLoginDto.builder()
@@ -86,15 +86,17 @@ public class UserKakoLoginService {
                 .username(username)
                 .nickname( DEFAULT_NICKNAME + (lastUserId+1) )
                 .build();
-        userRepository.save(user);
+        userRepo.save(user);
     }
 
     private Long getLastUserId() throws Exception {
-        return userRepository.findLastUserId();
+        User user = userRepo.findFirstByOrderByIdDesc();
+        System.out.println(user);
+        return  user == null ? 0 : user.getId();
     }
 
     private boolean isJoined(String providerId) throws Exception {
-        if(userRepository.findUserByProviderId(providerId) == null){
+        if(userRepo.countByUsername(providerId) <= 0){
             return false;
         }
         return true;
@@ -113,7 +115,6 @@ public class UserKakoLoginService {
             throw new Exception(e.getMessage());
         }
         String kakaoUserId = "KAKAO."+resultMap.getBody().get("id").toString();
-        System.out.println(kakaoUserId);
         return kakaoUserId;
     }
 }

@@ -17,7 +17,7 @@ public class UserDestoryService {
     private UserRepo userRepo;
 
     public void destroy(Long userId) throws Exception {
-        userRepo.remove(userId);
+        userRepo.deleteById(userId);
     }
 
 }

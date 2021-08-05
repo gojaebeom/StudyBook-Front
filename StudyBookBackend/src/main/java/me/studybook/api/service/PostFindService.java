@@ -21,13 +21,8 @@ public class PostFindService {
     private PostRepo postRepo;
     private UserRepo userRepo;
 
-    public ResPostsDto find() throws Exception {
+    public List<Post> find() throws Exception {
 
-        List<Post> posts = postRepo.findPosts();
-        for(Post post: posts){
-            User user = userRepo.findUserById(post.getUser().getId());
-        }
-
-        return null;
+        return null; //postRepo.findPosts();
     }
 }

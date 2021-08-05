@@ -46,9 +46,6 @@ export default function PostCreateModal() {
             url: "/api/posts",
             withCredentials: true,
             headers: {
-                "Access-Control-Allow-Methods": "POST",
-                "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
-                "Access-Control-Allow-Headers":"Content-Type, Authorization",
                 "Authorization":`bearer ${window.localStorage.getItem("act")}`,
                 "content-Type": "multipart/form-data",
             },

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import CoverImg from "../../images/StudyBook.svg";
 
 function KakaoLogin({location}) {
 
@@ -46,14 +46,12 @@ function KakaoLogin({location}) {
 
         console.log(studybookRes);
 
-        const { accessToken, refreshToken } = studybookRes.tokens;
+        const { accessToken, refreshToken, userId, profile } = studybookRes.tokens;
 
         window.localStorage.setItem("act", accessToken);
         window.localStorage.setItem("rft", refreshToken);
-        const decoded = jwt_decode(accessToken);
-        console.log(decoded);
-        const { id } = decoded;
-        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: id}});
+
+        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: userId, profile: profile !== null ? profile : CoverImg }});
     });
 
     return <Redirect to="/"/>;

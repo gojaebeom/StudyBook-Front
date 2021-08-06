@@ -43,7 +43,7 @@ function Header() {
                     className="relative w-12 h-12 rounded-full flex justify-center items-center border cursor-pointer"
                 >
                     <div className="relative group w-9 h-9  rounded-full bg-white flex flex-col items-center justify-center">
-                        <img src={CoverImg} alt="profile img" className="w-full h-full rounded-full"/>
+                        <img src={ loginState.profile } alt="profile img" className="w-full h-full rounded-full"/>
                     </div>
                     <div
                         className={`${loggedInMenuState ? "flex" : "hidden"} flex-col rounded-sm absolute right-0 -bottom-48 w-40 bg-white border`}>
@@ -63,3 +63,17 @@ function Header() {
 }
 
 export default withRouter(Header);
+
+public/favicon.ico
+public/manifest.json
+src/App.js
+src/_reducers/modules/login.js
+src/_reducers/modules/postDetail.js
+src/_reducers/modules/posts.js
+src/api/index.js
+src/components/Header.js
+src/components/PostDetailItem.js
+src/components/PostFilter.js
+src/components/PostListItem.js
+src/components/pages/KakaoLogin.js
+src/components/pages/Main.js

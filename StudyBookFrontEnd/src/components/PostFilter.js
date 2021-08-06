@@ -16,7 +16,7 @@ function PostFilter({history}) {
     });
 
     return (
-        <div className="font-noto-light flex flex-col items-center mt-10 mr-5">
+        <div className="sticky ont-noto-light flex flex-col items-center mt-10 mr-5">
             <div className="text-xl text-gray-500 font-noto-bold mb-2">
                 필터
             </div>

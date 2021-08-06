@@ -51,7 +51,10 @@ public class UserKakoLoginService {
 
         return ResUserLoginDto.builder()
                 .accessToken(tokens[0])
+                .userId(user.getId())
+                .profile(user.getProfile())
                 .refreshToken(tokens[1])
+
                 .build();
     }
 

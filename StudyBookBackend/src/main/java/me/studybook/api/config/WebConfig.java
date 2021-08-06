@@ -15,6 +15,8 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new TokenValidationIC())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/api/users/kakao-login");
+                .excludePathPatterns("/api/users/kakao-login")
+                .excludePathPatterns("/api/posts")
+                .excludePathPatterns("/api/posts/{id}");
     }
 }

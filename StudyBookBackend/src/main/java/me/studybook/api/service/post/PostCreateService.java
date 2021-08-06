@@ -53,7 +53,8 @@ public class PostCreateService {
     }
 
     private Boolean validateCategory(PostCategory postCategory) throws Exception {
-        return postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()) >= 0 ? true : false;
+        System.out.println(postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()));
+        return postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()) <= 0 ? true : false;
     }
 
 }

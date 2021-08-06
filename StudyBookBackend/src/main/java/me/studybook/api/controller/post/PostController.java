@@ -2,16 +2,15 @@ package me.studybook.api.controller.post;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.studybook.api.domain.Post;
 import me.studybook.api.dto.req.ReqPostCreateDto;
+import me.studybook.api.dto.res.ResPostDetailDto;
 import me.studybook.api.dto.res.ResPostsDto;
-import me.studybook.api.service.PostFindService;
+import me.studybook.api.repo.post.mapper.PostDetailMapper;
+import me.studybook.api.repo.post.mapper.PostsMapper;
+import me.studybook.api.service.post.PostFindService;
 import me.studybook.api.service.post.PostCreateService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,17 +30,29 @@ public class PostController {
      * select * from users;
      */
 
-    private PostFindService postsFindService;
+    private PostFindService postFindService;
     private PostCreateService postCreateService;
 
 
     @GetMapping("")
     public ResponseEntity index() throws Exception{
-        List<Post> posts =  postsFindService.find();
+        List<ResPostsDto> posts =  postFindService.getPosts();
 
         Map<String, Object> responses = new HashMap<>();
-        responses.put("message", "Post create success!");
+        responses.put("message", "Get posts success");
         responses.put("posts", posts);
+        responses.put("status", 200);
+        return ResponseEntity.ok().body(responses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity show(@PathVariable Long id) throws Exception{
+
+        ResPostDetailDto postDetail = postFindService.getPostDetail(id);
+
+        Map<String, Object> responses = new HashMap<>();
+        responses.put("message", "Get posts success");
+        responses.put("post", postDetail);
         responses.put("status", 200);
         return ResponseEntity.ok().body(responses);
     }

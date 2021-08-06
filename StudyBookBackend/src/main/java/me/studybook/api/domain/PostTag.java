@@ -1,8 +1,10 @@
 package me.studybook.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "post_tags")
 @NoArgsConstructor
 @Getter
+@ToString
 public class PostTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

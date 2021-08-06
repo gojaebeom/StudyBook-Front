@@ -40,6 +40,9 @@ export default function App() {
                 <Route exact path="/users/kakao/login">
                     <KakaoLogin/>
                 </Route>
+                <Route exact path="/tags/:tagname">
+                    <div>태그</div>
+                </Route>
                 <Route exact path="/403">
                     <ErrorLayout
                         imagePath={Error404Img}

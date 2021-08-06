@@ -1,7 +1,7 @@
 const loginState = {
     isLoggedIn: false,
     userId: "",
-    profileImg: "",
+    profile: "",
 };
 
 export default function login(state=loginState, action){

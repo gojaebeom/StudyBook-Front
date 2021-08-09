@@ -2,10 +2,19 @@ package me.studybook.api.controller.user;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.studybook.api.dto.req.ReqLikeDto;
 import me.studybook.api.dto.req.ReqUserEditDto;
+import me.studybook.api.dto.res.ResPostsDto;
+import me.studybook.api.dto.res.ResUserDetailDto;
 import me.studybook.api.dto.res.ResUserLoginDto;
+import me.studybook.api.repo.post.mapper.PostLikeMapper;
+import me.studybook.api.repo.post.mapper.PostsMapper;
+import me.studybook.api.repo.user.mapper.UserMapper;
+import me.studybook.api.service.LikeService;
+import me.studybook.api.service.post.PostFindService;
 import me.studybook.api.service.token.TokenService;
 import me.studybook.api.service.user.UserDestoryService;
+import me.studybook.api.service.user.UserDetailService;
 import me.studybook.api.service.user.UserKakoLoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +23,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +34,9 @@ public class UserController {
 
     private UserKakoLoginService userKakoLoginService;
     private UserDestoryService userDestoryService;
+    private UserDetailService userDetailService;
+    private PostFindService postFindService;
+    private LikeService likeService;
 
     @PostMapping("/kakao-login")
     public ResponseEntity kakaoLogin(@RequestBody Map<String,String> loginDto, HttpServletResponse response) throws Exception {
@@ -44,6 +57,23 @@ public class UserController {
         return ResponseEntity.ok().body(responses);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity show(@PathVariable Long id) throws Exception {
+        /**
+         * path로 받은 Id를 통해 유저 정보 응답
+         */
+
+        ResUserDetailDto user =  userDetailService.getUserDetail(id);
+        List<ResPostsDto> posts = postFindService.getPostsByUserId(id);
+        Map<String, Object> responses = new HashMap<>();
+        responses.put("message", "Get user detail success");
+        responses.put("user", user);
+        responses.put("posts", posts);
+        responses.put("status", 200);
+
+        return ResponseEntity.ok().body(responses);
+    }
+
     @PutMapping ("/{id}")
     public ResponseEntity edit(ReqUserEditDto userEditDto, HttpServletRequest request) throws Exception {
         /**
@@ -59,6 +89,20 @@ public class UserController {
         System.out.println(userEditDto);
 
         return ResponseEntity.ok().body("responses");
+    }
+
+    @PostMapping("/liked/posts")
+    public ResponseEntity userLikedPost(@RequestBody ReqLikeDto likeDto) throws Exception {
+        log.info("POST_LIKE");
+        System.out.println(likeDto);
+
+        String message = likeService.create(likeDto);
+
+        Map<String, Object> responses = new HashMap<>();
+        responses.put("message", message);
+        responses.put("status", 200);
+
+        return ResponseEntity.ok().body(responses);
     }
 
     @DeleteMapping("/{id}")

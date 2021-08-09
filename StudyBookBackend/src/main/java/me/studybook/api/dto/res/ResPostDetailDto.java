@@ -4,8 +4,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import me.studybook.api.repo.post.mapper.PostDetailMapper;
+import me.studybook.api.repo.post.mapper.PostTagMapper;
 import me.studybook.api.repo.user.mapper.UserMapper;
+import me.studybook.api.service.time.TimeToNaturalTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -27,5 +31,23 @@ public class ResPostDetailDto {
         this.publishedAt = publishedAt;
         this.user = user;
         this.tags = tags;
+    }
+
+    public static ResPostDetailDto of(PostDetailMapper postDetail) {
+        List<String> tags = new ArrayList<>();
+        for(PostTagMapper _tag: postDetail.getPostTags()){
+            String tag = _tag.getTag().getName();
+            tags.add(tag);
+        }
+
+        ResPostDetailDto postDetailDto = ResPostDetailDto.builder()
+                .id(postDetail.getId())
+                .title(postDetail.getTitle())
+                .content(postDetail.getContent())
+                .user(postDetail.getUser())
+                .publishedAt(TimeToNaturalTime.formatTimeString(postDetail.getUpdatedAt()))
+                .tags(tags)
+                .build();
+        return postDetailDto;
     }
 }

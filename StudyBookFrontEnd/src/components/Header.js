@@ -14,9 +14,8 @@ function Header() {
     }
 
     const logoutHandler = () => {
-        dispatch({type: "IS_LOGGED_OUT"})
+        dispatch({type: "IS_LOGGED_OUT"});
     }
-
 
     return (
         <header className="relative w-full h-16 flex justify-between items-center border-b z-50 bg-white px-6">
@@ -28,7 +27,6 @@ function Header() {
                 <div className="w-6/12">
                 </div>
             </div>
-
             {
                 !loginState.isLoggedIn &&
                 <div className="font-noto-bold text-lg">
@@ -61,19 +59,4 @@ function Header() {
         </header>
     );
 }
-
 export default withRouter(Header);
-
-public/favicon.ico
-public/manifest.json
-src/App.js
-src/_reducers/modules/login.js
-src/_reducers/modules/postDetail.js
-src/_reducers/modules/posts.js
-src/api/index.js
-src/components/Header.js
-src/components/PostDetailItem.js
-src/components/PostFilter.js
-src/components/PostListItem.js
-src/components/pages/KakaoLogin.js
-src/components/pages/Main.js

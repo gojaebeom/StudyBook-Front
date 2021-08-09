@@ -5,6 +5,7 @@ import posts from "./modules/posts";
 import postDetail from "./modules/postDetail";
 import postFilter from "./modules/postFilter";
 import postCreate from "./modules/postCreate";
+import userDetail from "./modules/userDetail";
 
 
 const mainReducer = combineReducers({
@@ -13,6 +14,7 @@ const mainReducer = combineReducers({
     postDetail,
     postFilter,
     loggedInMenu,
-    postCreate
+    postCreate,
+    userDetail
 });
 export default mainReducer;

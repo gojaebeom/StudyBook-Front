@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.studybook.api.domain.User;
 import me.studybook.api.dto.res.ResUserLoginDto;
 import me.studybook.api.repo.user.UserRepo;
+import me.studybook.api.repo.user.mapper.UserMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -46,7 +47,7 @@ public class UserKakoLoginService {
         }
         log.info("로그인 진행");
 
-        User user = userRepo.findUserByUsername(kakaoProviderId);
+        UserMapper user = userRepo.findUserByUsername(kakaoProviderId);
         String[] tokens = createJWTToken(user.getId());
 
         return ResUserLoginDto.builder()
@@ -54,7 +55,6 @@ public class UserKakoLoginService {
                 .userId(user.getId())
                 .profile(user.getProfile())
                 .refreshToken(tokens[1])
-
                 .build();
     }
 
@@ -93,7 +93,7 @@ public class UserKakoLoginService {
     }
 
     private Long getLastUserId() throws Exception {
-        User user = userRepo.findFirstByOrderByIdDesc();
+        UserMapper user = userRepo.findFirstByOrderByIdDesc();
         System.out.println(user);
         return  user == null ? 0 : user.getId();
     }

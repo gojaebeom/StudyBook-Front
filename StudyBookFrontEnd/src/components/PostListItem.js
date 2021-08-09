@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import CoverImg from "../images/StudyBook.svg";
 
-export default function PostListItem({item, qouteColor, titleColor, profileBorderColor}) {
+export default function PostListItem({item, qouteColor, titleColor, profileBorderColor, detailMode}) {
     return (
         <React.Fragment>
             <div className="w-full flex flex-col items-center">
@@ -16,7 +16,7 @@ export default function PostListItem({item, qouteColor, titleColor, profileBorde
                         </h1>
                     </Link>
                     <div className="w-full flex justify-start">
-                        <div className="flex justify-start items-center mb-3">
+                        <div className={`${detailMode ? 'hidden' : 'flex'} justify-start items-center mb-3`}>
                             {/* 프로필 이미지 */}
                             <div className={`w-14 h-14 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
             mr-3 hover:${profileBorderColor} transition-all cursor-pointer`}>

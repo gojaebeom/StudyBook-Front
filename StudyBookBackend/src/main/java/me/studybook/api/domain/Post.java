@@ -43,8 +43,11 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post")
-    private List<PostTag> postTags = new ArrayList<>();
+//    @OneToMany(mappedBy = "post")
+//    private List<PostTag> postTags = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "post")
+//    private List<PostLike> postLikes = new ArrayList<>();
 
     @Builder
     public Post(Long id, String title, String content, User user, PostCategory postCategory) {

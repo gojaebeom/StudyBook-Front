@@ -9,6 +9,7 @@ import me.studybook.api.repo.post.PostRepo;
 import me.studybook.api.repo.post.PostTagRepo;
 import me.studybook.api.repo.post.TagRepo;
 import me.studybook.api.repo.user.UserRepo;
+import me.studybook.api.repo.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

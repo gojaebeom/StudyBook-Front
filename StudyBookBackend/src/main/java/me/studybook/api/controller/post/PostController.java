@@ -22,20 +22,13 @@ import java.util.Map;
 @AllArgsConstructor
 public class PostController {
 
-    /**
-     * select * from posts;
-     * select * from post_categories;
-     * select * from post_tags;
-     * select * from tags;
-     * select * from users;
-     */
-
     private PostFindService postFindService;
     private PostCreateService postCreateService;
 
 
     @GetMapping("")
     public ResponseEntity index() throws Exception{
+        log.info("POST:INDEX");
         List<ResPostsDto> posts =  postFindService.getPosts();
 
         Map<String, Object> responses = new HashMap<>();
@@ -47,7 +40,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity show(@PathVariable Long id) throws Exception{
-
+        log.info("POST:SHOW");
         ResPostDetailDto postDetail = postFindService.getPostDetail(id);
 
         Map<String, Object> responses = new HashMap<>();

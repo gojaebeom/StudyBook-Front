@@ -14,7 +14,7 @@ const postDetailState = {
     ]
 }
 
-export default function postsDetailReducer(state=postDetailState, action){
+export default function postDetailReducer(state=postDetailState, action){
     switch( action.type ) {
         case "SET_POST_DETAIL" :
             return action.payload;

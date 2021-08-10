@@ -27,10 +27,10 @@ public class LikeService {
     private PostRepo postRepo;
 
     public String create(ReqLikeDto likeDto) throws Exception {
-
+        // 조회
         PostLike postLike = getPostLike(likeDto.getUserId(), likeDto.getPostId());
-        System.out.println(postLike);
 
+        // 생성
         if(postLike == null){
             System.out.println("새로 생성");
             User user = userRepo.findUserById(likeDto.getUserId());
@@ -40,9 +40,8 @@ public class LikeService {
             return likeDto.getUserId()+".User liked "+likeDto.getPostId()+".Post";
         }
 
-        System.out.println("삭제");
-        System.out.println(postLike);
-        postLikeRepo.delete(postLike);
+        // 삭제
+        destory(postLike);
         return likeDto.getUserId()+".User un-liked "+likeDto.getPostId()+".Post";
     }
 
@@ -50,11 +49,7 @@ public class LikeService {
         return postLikeRepo.findPostLikeByUserIdAndPostId(userId, postId);
     }
 
-//    private boolean isLiked(Long userId, Long postId) throws Exception {
-//        System.out.println(userId);
-//        System.out.println(postId);
-//        Long count  = postLikeRepo.countPostLikeByUserIdAndPostId(userId, postId);
-//        System.out.println(count);
-//        return count <= 0 ? false : true;
-//    }
+    private void destory(PostLike postLike){
+        postLikeRepo.delete(postLike);
+    }
 }

@@ -1,4 +1,4 @@
-package me.studybook.api.service.time;
+package me.studybook.api.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,10 +15,12 @@ public class TimeToNaturalTime {
 
         long curTime = System.currentTimeMillis();
         long regTime = tempDate.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        System.out.println(curTime);
+        System.out.println(regTime);
         long diffTime = (curTime - regTime) / 1000;
 
         String msg = null;
-        if (diffTime < TimeToNaturalTime.SEC) {
+        if ( diffTime < TimeToNaturalTime.SEC ) {
             // sec
             msg = "방금 전";
         } else if ((diffTime /= TimeToNaturalTime.SEC) < TimeToNaturalTime.MIN) {

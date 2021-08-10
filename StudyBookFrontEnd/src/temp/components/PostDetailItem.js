@@ -1,10 +1,10 @@
 import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import React, {useEffect} from 'react';
-import {apiScaffold} from "../api";
+import {apiScaffold} from "../../api";
 import {Link, withRouter} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import CoverImg from "../images/StudyBook.svg";
+import CoverImg from "../../images/StudyBook.svg";
 
 
 function PostDetailItem({location}) {

@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {withRouter} from "react-router-dom";
-import CoverImg from "../images/cover.jpg";
+import CoverImg from "../../images/cover.jpg";
 
 function Header() {
 

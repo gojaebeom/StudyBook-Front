@@ -1,4 +1,4 @@
-package me.studybook.api.service.token;
+package me.studybook.api.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

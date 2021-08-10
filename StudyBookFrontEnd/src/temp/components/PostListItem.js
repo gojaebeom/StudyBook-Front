@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import CoverImg from "../images/StudyBook.svg";
+import CoverImg from "../../images/StudyBook.svg";
 
 export default function PostListItem({item, qouteColor, titleColor, profileBorderColor, detailMode}) {
     return (
@@ -21,7 +21,7 @@ export default function PostListItem({item, qouteColor, titleColor, profileBorde
                             <div className={`w-14 h-14 rounded-full overflow-hidden border-2 border-dotted flex justify-center items-center 
             mr-3 hover:${profileBorderColor} transition-all cursor-pointer`}>
                                 <img className="w-11 h-11 rounded-full"
-                                     src={item.user.profile ? item.user.profile : CoverImg} alt="cover img"/>
+                                    src={item.user.profile ? item.user.profile : CoverImg} alt="cover img"/>
                             </div>
                             <div className="flex flex-col font-noto-medium">
                                 <div className="font-noto-medium text-black text-xl">

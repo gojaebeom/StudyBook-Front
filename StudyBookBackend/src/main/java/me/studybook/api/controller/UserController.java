@@ -1,4 +1,4 @@
-package me.studybook.api.controller.user;
+package me.studybook.api.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,19 +7,14 @@ import me.studybook.api.dto.req.ReqUserEditDto;
 import me.studybook.api.dto.res.ResPostsDto;
 import me.studybook.api.dto.res.ResUserDetailDto;
 import me.studybook.api.dto.res.ResUserLoginDto;
-import me.studybook.api.repo.post.mapper.PostLikeMapper;
-import me.studybook.api.repo.post.mapper.PostsMapper;
-import me.studybook.api.repo.user.mapper.UserMapper;
 import me.studybook.api.service.LikeService;
-import me.studybook.api.service.post.PostFindService;
-import me.studybook.api.service.token.TokenService;
-import me.studybook.api.service.user.UserDestoryService;
-import me.studybook.api.service.user.UserDetailService;
-import me.studybook.api.service.user.UserKakoLoginService;
+import me.studybook.api.service.PostService;
+import me.studybook.api.service.TokenService;
+import me.studybook.api.service.UserService;
+import me.studybook.api.service.UserKakoLoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -33,13 +28,12 @@ import java.util.Map;
 public class UserController {
 
     private UserKakoLoginService userKakoLoginService;
-    private UserDestoryService userDestoryService;
-    private UserDetailService userDetailService;
-    private PostFindService postFindService;
+    private UserService userService;
+    private PostService postService;
     private LikeService likeService;
 
     @PostMapping("/kakao-login")
-    public ResponseEntity kakaoLogin(@RequestBody Map<String,String> loginDto, HttpServletResponse response) throws Exception {
+    public ResponseEntity kakaoJoin(@RequestBody Map<String,String> loginDto, HttpServletResponse response) throws Exception {
         log.info("loginDto", loginDto);
         /**
          * 발급 받은 엑세스토큰을 서비스로 전달
@@ -63,8 +57,8 @@ public class UserController {
          * path로 받은 Id를 통해 유저 정보 응답
          */
 
-        ResUserDetailDto user =  userDetailService.getUserDetail(id);
-        List<ResPostsDto> posts = postFindService.getPostsByUserId(id);
+        ResUserDetailDto user =  userService.show(id);
+        List<ResPostsDto> posts = postService.index(id);
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", "Get user detail success");
         responses.put("user", user);
@@ -117,7 +111,7 @@ public class UserController {
         Long tokenId = Long.parseLong(_tokenId);
         TokenService.isMatched(id, tokenId);
 
-        userDestoryService.destroy(id);
+        userService.destroy(id);
 
         Map<String, Object> responses = new HashMap<>();
         responses.put("message", "user delete success!");

@@ -1,9 +1,9 @@
 import DefaultLayout from "../layouts/DefaultLayout";
 import React, {useEffect} from "react";
-import {apiScaffold} from "../../api";
+import {apiScaffold} from "../../../api";
 import { withRouter } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import ProfileImg from "../../images/StudyBook.svg";
+import ProfileImg from "../../../images/StudyBook.svg";
 import PostListItem from "../PostListItem";
 import PostList from "../PostList";
 

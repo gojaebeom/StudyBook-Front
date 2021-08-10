@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import DefaultLayout from "../layouts/DefaultLayout";
 import TopTagList from "../TopTagList";
 import axios from "axios";
-import {apiScaffold} from "../../api";
+import {apiScaffold} from "../../../api";
 
 
 export default function Main() {

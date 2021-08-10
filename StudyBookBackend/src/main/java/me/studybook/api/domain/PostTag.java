@@ -18,11 +18,11 @@ public class PostTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tag_id", nullable = false)
     private Tag tag;
 

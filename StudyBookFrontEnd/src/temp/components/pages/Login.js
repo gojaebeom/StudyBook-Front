@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
-import LoginCoverImg from "../../images/login-cover.png";
-import KakaoLoginImg from "../../images/kakao.png";
-import GoogleLoginImg from "../../images/google.png";
+import LoginCoverImg from "../../../images/login-cover.png";
+import KakaoLoginImg from "../../../images/kakao.png";
+import GoogleLoginImg from "../../../images/google.png";
 
 export default function Login() {
     return (

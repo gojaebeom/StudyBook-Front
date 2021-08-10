@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
 import CoverImg from "../../images/StudyBook.svg";
 
-function KakaoLogin({location}) {
+function KakaoJoinPage({location}) {
 
     const dispatch = useDispatch();
     const loginState = useSelector(state => state.login);
@@ -27,9 +27,10 @@ function KakaoLogin({location}) {
             },
             data: params,
         })
-            .then(data => data.data)
-            .catch(err => console.log(err));
+        .then(data => data.data)
+        .catch(err => console.log(err));
 
+        console.log(kakaoRes.access_token);
         console.log(kakaoRes.access_token);
 
         const studybookRes = await axios({
@@ -41,8 +42,8 @@ function KakaoLogin({location}) {
             },
             data: {"accessToken": kakaoRes.access_token},
         })
-            .then(data => data.data)
-            .catch(err => console.log(err));
+        .then(data => data.data)
+        .catch(err => console.log(err));
 
         console.log(studybookRes);
 
@@ -57,4 +58,4 @@ function KakaoLogin({location}) {
     return <Redirect to="/"/>;
 }
 
-export default withRouter(KakaoLogin);
+export default withRouter(KakaoJoinPage);

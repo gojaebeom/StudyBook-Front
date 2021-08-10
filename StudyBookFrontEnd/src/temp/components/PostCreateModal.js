@@ -1,10 +1,12 @@
 import axios from "axios";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 export default function PostCreateModal() {
 
     const [isNew, setIsNew] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
 
     const dispatch = useDispatch();
     const postCrateState = useSelector(state => state.postCreate);
@@ -58,7 +60,7 @@ export default function PostCreateModal() {
                 throw new Error(message);
             });
 
-        console.log(res);
+        setIsFinished(true);
 
     }
 
@@ -66,6 +68,7 @@ export default function PostCreateModal() {
         dispatch({type: "POST_CREATE_MODAL_TOGGLE"});
     }
 
+    if(isFinished) return <Redirect to={'/'}/>
     return (
         <div className="w-full h-screen absolute left-0 top-0 bg-gray-50 z-50 flex justify-center items-center">
             <div className="w-11/12 lg:w-auto font-noto-light flex flex-col items-center">

@@ -1,13 +1,17 @@
-package me.studybook.api.service.post;
+package me.studybook.api.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.studybook.api.domain.*;
 import me.studybook.api.dto.req.ReqPostCreateDto;
+import me.studybook.api.dto.res.ResPostDetailDto;
+import me.studybook.api.dto.res.ResPostsDto;
 import me.studybook.api.repo.post.PostCategoryRepo;
 import me.studybook.api.repo.post.PostRepo;
 import me.studybook.api.repo.post.PostTagRepo;
 import me.studybook.api.repo.post.TagRepo;
+import me.studybook.api.repo.post.mapper.PostDetailMapper;
+import me.studybook.api.repo.post.mapper.PostsMapper;
 import me.studybook.api.repo.user.UserRepo;
 import me.studybook.api.repo.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
@@ -19,13 +23,37 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 @Slf4j
-public class PostCreateService {
+public class PostService {
 
     private PostRepo postRepo;
     private TagRepo tagRepo;
     private UserRepo userRepo;
     private PostTagRepo postTagRepo;
     private PostCategoryRepo postCategoryRepo;
+
+    public List<ResPostsDto> index() throws Exception {
+
+        List<PostsMapper> _posts =  postRepo.findAllByOrderByIdDesc();
+        List<PostTag> postTags = postTagRepo.findAll();
+
+        return ResPostsDto.of(_posts, postTags);
+    }
+
+    public List<ResPostsDto> index(Long id) throws Exception{
+
+        List<PostsMapper> _posts = postRepo.findAllByUserId(id);
+        List<PostTag> postTags = postTagRepo.findAll();
+
+        return ResPostsDto.of(_posts, postTags);
+    }
+
+    public ResPostDetailDto show(Long id) throws Exception {
+
+        PostDetailMapper _postDetail =  postRepo.findOneById(id);
+        List<PostTag> postTags = postTagRepo.findByPostId(id);
+
+        return ResPostDetailDto.of(_postDetail, postTags);
+    }
 
 
     public void create(ReqPostCreateDto postCreateDto) throws Exception {

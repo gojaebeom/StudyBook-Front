@@ -1,4 +1,4 @@
-package me.studybook.api.service.user;
+package me.studybook.api.service;
 
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;

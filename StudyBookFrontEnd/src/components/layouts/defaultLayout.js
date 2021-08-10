@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../shared/header";
+import Header from "../widgets/header";
 
 function DefaultLayout({ children }){
     return(

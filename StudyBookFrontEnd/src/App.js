@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import JoinPage from "./components/pages/joinPage";
 import kakaoJoinPage from "./components/pages/kakaoJoinPage";
 import MainPage from "./components/pages/mainPage";
+import PostDetailPage from "./components/pages/postDetailPage";
+import PostDraftPage from "./components/pages/postDraftPage";
 
 function App(){
     return(
@@ -11,12 +13,12 @@ function App(){
             <Route exact path="/">
                 <MainPage />
             </Route>{/* 메인페이지 */}
-            <Route path="/to">
-                <MainPage />
-            </Route>
-            <Route path="/q-or-a">
-                <MainPage />
-            </Route>
+            <Route path="/posts/:id">
+                <PostDetailPage />
+            </Route>{/* 게시글 상세페이지 */}
+            <Route path="/draft">
+                <PostDraftPage />
+            </Route>{/* 게시글 작성페이지 */}
             <Route path="/login">
                 <JoinPage />
             </Route>

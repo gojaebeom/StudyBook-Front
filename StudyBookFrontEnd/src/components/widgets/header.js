@@ -15,7 +15,7 @@ function Header(){
                     <NavLink to="/q-or-a" activeStyle={{color:"#1a73e8"}}>질문게시판</NavLink>
                 </li>
                 <li className="mr-5">
-                    <NavLink to="/tags" activeStyle={{color:"#1a73e8"}}>태그</NavLink>
+                    <NavLink to="/draft" activeStyle={{color:"#1a73e8"}}>글쓰기</NavLink>
                 </li>
                 <li >
                     <NavLink to="/login" activeStyle={{color:"#1a73e8"}}>로그인</NavLink>

@@ -47,6 +47,10 @@
     color: #202124 !important;
 }
 
+.toastui-editor-defaultUI-toolbar{
+    border-radius: 0!important;
+}
+
 .toastui-editor-contents {
     font-family: 'noto-light' !important;
 

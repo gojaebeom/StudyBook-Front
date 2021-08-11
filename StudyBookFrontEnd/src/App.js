@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import JoinPage from "./components/pages/joinPage";
 import KakaoJoinPage from "./components/pages/kakaoJoinPage";
@@ -8,6 +9,25 @@ import PostDraftPage from "./components/pages/postDraftPage";
 import UserDetailPage from "./components/pages/userDetailPage";
 
 function App(){
+
+    const searchState = useSelector(s=>s.search);
+    const dispatch = useDispatch();
+    // console.log(searchState.mode);
+    if(searchState.mode){
+        document.body.style.overflow = "hidden";
+        document.onkeyup = (e) => {
+            if(e.code === "Escape"){
+                dispatch({type:"SEARCH_TOGGLE"});
+            }
+        }
+    }else{
+        document.body.style.overflow = "scroll";
+        document.onkeyup = (e) => {
+            if(e.code === "ControlLeft"){
+                dispatch({type:"SEARCH_TOGGLE"});
+            }
+        }
+    }
     return(
     <React.Fragment>
         <Switch>

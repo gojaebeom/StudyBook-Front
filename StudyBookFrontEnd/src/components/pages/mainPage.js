@@ -5,8 +5,6 @@ import ReadMoreBox from "../widgets/readMoreBox";
 
 function MainPage(){
 
-    
-
     return(
     <DefaultLayout>
         <div id="filter" className="w-full mb-5 flex flex-wrap">

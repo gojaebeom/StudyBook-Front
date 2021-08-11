@@ -33,10 +33,6 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
-    private PostCategory postCategory;
-
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -50,11 +46,10 @@ public class Post {
 //    private List<PostLike> postLikes = new ArrayList<>();
 
     @Builder
-    public Post(Long id, String title, String content, User user, PostCategory postCategory) {
+    public Post(Long id, String title, String content, User user) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.user = user;
-        this.postCategory = postCategory;
     }
 }

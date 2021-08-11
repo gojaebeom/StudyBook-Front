@@ -17,7 +17,7 @@ export async function apiScaffold({METHOD, URL, DATA=null}){
     .catch(err => {
         const {message, status} = err.response.data;
         alert(`CODE: ${status}\n${message}`);
-        throw new Error(message);
+        // throw new Error(message);
     });
 }
 

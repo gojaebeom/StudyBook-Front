@@ -6,7 +6,7 @@ function DefaultLayout({ children }){
     <React.Fragment>
         <Header />
         <main className="w-full flex flex-col items-center">
-            <section className="w-full lg:w-1000">
+            <section className="w-full lg:w-1000 flex flex-col items-center">
                 {children}
             </section>
         </main>

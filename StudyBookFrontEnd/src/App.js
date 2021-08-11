@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import JoinPage from "./components/pages/joinPage";
-import kakaoJoinPage from "./components/pages/kakaoJoinPage";
+import KakaoJoinPage from "./components/pages/kakaoJoinPage";
 import MainPage from "./components/pages/mainPage";
 import PostDetailPage from "./components/pages/postDetailPage";
 import PostDraftPage from "./components/pages/postDraftPage";
+import UserDetailPage from "./components/pages/userDetailPage";
 
 function App(){
     return(
@@ -21,10 +22,13 @@ function App(){
             </Route>{/* 게시글 작성페이지 */}
             <Route path="/login">
                 <JoinPage />
-            </Route>
+            </Route>{/* 로그인 페이지 */}
             <Route path="/users/kakao/login">
-                <kakaoJoinPage />
-            </Route>
+                <KakaoJoinPage />
+            </Route>{/* 카카오 인증 페이지 */}
+            <Route path="/users/:id">
+                <UserDetailPage />
+            </Route>{/* 회원 상세 페이지 */}
         </Switch>
     </React.Fragment>
     )

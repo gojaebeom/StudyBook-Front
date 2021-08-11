@@ -1,12 +1,9 @@
 const postCreateState = {
     writerId: "",
     title: "",
+    tagString:"",
     tags: [],
     content: "",
-    description: "",
-    category: "",
-    isPublic: true,
-    open: false,
     publish: false
 }
 

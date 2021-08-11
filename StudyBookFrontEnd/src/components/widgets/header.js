@@ -11,9 +11,6 @@ function Header(){
                 <li className="mr-3">
                     <NavLink exact to="/" activeStyle={{color:"#1a73e8"}}>피드</NavLink>
                 </li>
-                <li className="mr-3">
-                    <NavLink to="/q-or-a" activeStyle={{color:"#1a73e8"}}>질문게시판</NavLink>
-                </li>
                 <li className="mr-5">
                     <NavLink to="/draft" activeStyle={{color:"#1a73e8"}}>글쓰기</NavLink>
                 </li>

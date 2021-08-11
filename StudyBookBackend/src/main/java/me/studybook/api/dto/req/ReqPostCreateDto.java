@@ -16,7 +16,6 @@ public class ReqPostCreateDto {
     private String title;
     private String content;
     private String[] tags;
-    private String category;
     private Long userId;
 
     public Post toPost(User user) {
@@ -50,10 +49,4 @@ public class ReqPostCreateDto {
         return postTags;
     }
 
-    public PostCategory toPostCategory(User user) {
-        return  PostCategory.builder()
-                .name(this.category)
-                .user(user)
-                .build();
-    }
 }

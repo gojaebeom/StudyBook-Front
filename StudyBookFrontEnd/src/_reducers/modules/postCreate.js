@@ -9,6 +9,8 @@ const postCreateState = {
 
 export default function postCreate(state=postCreateState, action){
     switch( action.type ) {
+        case "POST_CREATE_INIT" :
+            return {...state};
         case "POST_CREATE_STATE_CHANGE" :
             return action.payload;
         case "POST_CREATE_MODAL_TOGGLE" :

@@ -2,8 +2,27 @@ import { Link } from "react-router-dom";
 import DefaultLayout from "../layouts/defaultLayout";
 import img from "../../images/StudyBook.svg";
 import ReadMoreBox from "../widgets/readMoreBox";
+import { useEffect } from "react";
+import { apiScaffold } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
 
 function MainPage(){
+
+    const dispatch = useDispatch();
+    const postsState = useSelector(s => s.posts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+        const res = await apiScaffold({
+            "METHOD": "GET",
+            "URL":"/api/posts"
+        });
+        console.log(res);
+
+        dispatch({type:"INIT_POSTS", payload:{
+            ...postsState,
+            posts: res.posts
+        }});
+    },[]);
 
     return(
     <DefaultLayout>
@@ -19,192 +38,61 @@ function MainPage(){
         </div>
 
         <div className="w-full grid grid-flow-col md:grid-flow-row md:grid-cols-3 md:grid-rows-3 md:gap-4 mb-10">
+            {
+                postsState.posts.map((item, index) => {
+                    if(index === 0){
+                        return(
+                        <div className="row-span-2 flex flex-col items-start p-5 rounded-md">
+                            <Link to="/users/1" className="flex justify-center items-center mb-3">
+                                <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
+                                    <img src={img} alt="img" className="rounded-full w-8 h-8"/>
+                                </div>
+                                <div>
+                                    {item.user.nickname}
+                                </div>
+                            </Link> {/* 프로필 */}
+                            <Link to="/posts/1" className="font-noto-black text-2xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent hover:text-indigo-600 transition-all delay-75 mb-5">
+                                {item.title}
+                            </Link> {/* 제목 */}
             
-            <div className="row-span-2 flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-2xl bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-
-                <ReadMoreBox 
-                    content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                    height="h-36"
-                />
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
-            <div className="border flex flex-col items-start p-5 rounded-md">
-                <Link to="/users/1" className="flex justify-center items-center mb-3">
-                    <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
-                        <img src={img} alt="img" className="rounded-full w-8 h-8"/>
-                    </div>
-                    <div>
-                        고재범
-                    </div>
-                </Link> {/* 프로필 */}
-                <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
-                    자바스크립트를 활용하여 알고리즘 배우기
-                </Link> {/* 제목 */}
-                <div className="flex flex-wrap">
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">자바스크립트</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">JS</Link>
-                    <Link to="/tags/name" className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">알고리즘</Link>
-                </div> {/* 태그 리스트 */}
-            </div> {/* 카드 */}
+                            <ReadMoreBox 
+                                content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                                height="h-36"
+                            />
+                            <div className="flex flex-wrap">
+                                {
+                                    item.tags.map((item)=>{
+                                        return <Link to={`/tags/${item}`} className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">{item}</Link>
+                                    })
+                                }
+                            </div>
+                        </div>
+                        )
+                    }
+                    return(
+                    <div className="border flex flex-col items-start p-5 rounded-md">
+                        <Link to="/users/1" className="flex justify-center items-center mb-3">
+                            <div className="w-10 h-10 flex justify-center items-center border rounded-full mr-3">
+                                <img src={img} alt="img" className="rounded-full w-8 h-8"/>
+                            </div>
+                            <div>
+                                {item.user.nickname}
+                            </div>
+                        </Link> {/* 프로필 */}
+                        <Link to="/posts/1" className="font-noto-black text-xl text-gray-700 hover:text-indigo-600 transition-all delay-75 mb-5">
+                            {item.title}
+                        </Link> {/* 제목 */}
+                        <div className="flex flex-wrap">
+                            {
+                                item.tags.map((item)=>{
+                                    return <Link to={`/tags/${item}`} className="font-noto-thin text-xs p-1 rounded-sm bg-gray-100 mr-2">{item}</Link>
+                                })
+                            }
+                        </div> 
+                    </div> 
+                    )
+                })
+            }
         </div>
         <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between mb-16">
             <div className="flex items-center">

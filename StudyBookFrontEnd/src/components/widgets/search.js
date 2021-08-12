@@ -14,7 +14,7 @@ function Search(){
             onClick={SearchToggleHandler}
         >
             <i className="fas fa-search text-2xl text-gray-600 mr-1"></i>
-            <span className="font-pacifico text-lg text-gray-600">Ctrl</span>
+            <span className="font-pacifico text-xl text-gray-600">Esc</span>
         </button>
         <div className={`${searchState.mode ? "fixed" : "hidden"} left-0 top-0 w-full h-screen bg-black bg-opacity-40 z-50 flex justify-center items-start`}>
             <div className="w-600 h-600 bg-white rounded-xl mt-20 shadow-lg">

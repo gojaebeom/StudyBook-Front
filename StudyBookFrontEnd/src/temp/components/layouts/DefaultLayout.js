@@ -21,7 +21,7 @@ export default function DefaultLayout({left, main, right}) {
 
     return (
         <div className="App w-full flex flex-col items-center"
-             onClick={clickHandler}
+            onClick={clickHandler}
         >
             <Header/>
             <div className="w-full flex justify-center">

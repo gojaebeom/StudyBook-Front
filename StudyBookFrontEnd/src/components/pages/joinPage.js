@@ -2,8 +2,18 @@ import {Link} from "react-router-dom";
 import LoginCoverImg from "../../images/login-cover.png";
 import KakaoLoginImg from "../../images/kakao.png";
 import GoogleLoginImg from "../../images/google.png";
+import { useDispatch } from "react-redux";
 
 function JoinPage() {
+
+    const dispatch = useDispatch();
+    const googleLoginHandler = () => {
+        dispatch({type:"SET_TOAST", payload:{
+            content: "준비중인 기능입니다.",
+            type: "INFO"
+        }});
+    }
+
     return (
         <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-50">
             <div className="w-600 border rounded-lg flex flex-col justify-center items-center px-5 py-10 bg-white">
@@ -21,7 +31,7 @@ function JoinPage() {
                 </a>
                 <br/>
                 <button
-                    onClick={() => alert("준비중입니다. 😳")}
+                    onClick={googleLoginHandler}
                     className="border w-10/12 h-16 flex justify-center items-center bg-white font-noto-bold text-lg">
                     구글 로그인
                     <img src={GoogleLoginImg} alt="logo" className="w-8 h-8 ml-2"/>

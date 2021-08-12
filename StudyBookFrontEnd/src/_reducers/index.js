@@ -7,6 +7,7 @@ import postFilter from "./modules/postFilter";
 import postCreate from "./modules/postCreate";
 import userDetail from "./modules/userDetail";
 import search from "./modules/search";
+import toast from "./modules/toast";
 
 
 const mainReducer = combineReducers({
@@ -17,6 +18,7 @@ const mainReducer = combineReducers({
     loggedInMenu,
     postCreate,
     userDetail,
-    search
+    search,
+    toast
 });
 export default mainReducer;

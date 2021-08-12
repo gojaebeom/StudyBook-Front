@@ -51,9 +51,12 @@
     border-radius: 0!important;
 }
 
+.toastui-editor-ww-container{
+    z-index: 1 !important;
+}
+
 .toastui-editor-contents {
     font-family: 'noto-light' !important;
-
 }
 
 .toastui-editor-contents h2 {

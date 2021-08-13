@@ -14,13 +14,11 @@ function LoggedInGlobal({ children }){
     
             const target = document.querySelector("#loggedin-toggle");
             while (el) {
-                console.log(el.nodeName);
                 el = el.parentNode;
                 
                 if (el === target) {
                     return;
                 }
-                console.log(el);
                 if(el === null){
                     break;
                 }
@@ -40,6 +38,7 @@ function LoggedInGlobal({ children }){
             document.body.removeEventListener("click", loggedInMenuToggle);
         }
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [login]);
 
     

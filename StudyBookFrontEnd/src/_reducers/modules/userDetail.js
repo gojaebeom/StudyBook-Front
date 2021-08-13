@@ -1,5 +1,3 @@
-import CoverImg from "../../images/cover.jpg";
-
 const userDetailState = {
     id:"",
     nickname:"",

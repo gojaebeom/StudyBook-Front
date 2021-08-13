@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function RefreshPage({ children }){
-    const loginState = useSelector(s => s.login);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,6 +28,7 @@ function RefreshPage({ children }){
                 profile: ""
             }});
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return(

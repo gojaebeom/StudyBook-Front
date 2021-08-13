@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Search from "./search";
 import CoverImg from "../../images/StudyBook.svg";
 
-function Header({ }){
+function Header(){
 
 
     const loginState = useSelector(state => state.login);

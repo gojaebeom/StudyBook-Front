@@ -19,6 +19,7 @@ function Toast(){
             console.log("딜레이 삭제");
             clearTimeout(delay);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[toastState]);
 
 

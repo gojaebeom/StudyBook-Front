@@ -26,6 +26,7 @@ function SearchGlobal({ children }){
             console.log("검색 폼 핸들러 삭제");
             document.body.removeEventListener("keyup", searchFormHandler);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return(

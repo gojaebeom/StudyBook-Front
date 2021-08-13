@@ -1,5 +1,3 @@
-import CoverImg from "../../images/cover.jpg";
-
 const postsState = {
     total: 0,
     sortType: "",
@@ -7,7 +5,7 @@ const postsState = {
         {
             id:1,
             user: {
-                profile:CoverImg,
+                profile:"",
                 nickname:"",
             },
             title:"",

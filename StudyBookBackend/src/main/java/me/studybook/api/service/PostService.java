@@ -15,7 +15,10 @@ import me.studybook.api.repo.user.UserRepo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.net.BindException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -54,33 +57,35 @@ public class PostService {
 
 
     public void create(ReqPostCreateDto postCreateDto) throws Exception {
-        Long userId = postCreateDto.getUserId();
 
+        Long userId = postCreateDto.getUserId();
         User user = userRepo.findUserById(userId);
 
-//        PostCategory postCategory = postCreateDto.toPostCategory(user);
+        if(postCreateDto.getTitle() == null) {
+            throw new BindException("재목을 입력해주세요.");
+        }
+
+        List<String> _tags = postCreateDto.getTags();
+        if(_tags == null){
+            throw new BindException("태그는 한개 이상 등록해야합니다.");
+        }
+        if(_tags.size() > 3){
+            throw new BindException("태그는 3개까지 등록할 수 있습니다.");
+        }
+
+        Set checkedTags = new HashSet(_tags);
+
+        if(_tags.size() != checkedTags.size()){
+            throw new BindException("하나의 게시물에 동일한 태그를 등록할 수 없습니다.");
+        }
+
         Post post = postCreateDto.toPost(user);
         List<Tag> tags = postCreateDto.toTags();
-        List<PostTag> postTags =  postCreateDto.toPostTags(post, tags);
+        List<PostTag> postTags = postCreateDto.toPostTags(post, tags);
 
-//        if(validateCategory(postCategory)){
-//            // 없는 카테고리
-//            log.info("새로운 카테고리 생성");
-//            createCategory(postCategory);
-//        }
 
         postRepo.save(post);
         tagRepo.saveAll(tags);
         postTagRepo.saveAll(postTags);
     }
-
-//    private void createCategory(PostCategory postCategory) throws Exception {
-//        postCategoryRepo.save(postCategory);
-//    }
-//
-//    private Boolean validateCategory(PostCategory postCategory) throws Exception {
-//        System.out.println(postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()));
-//        return postCategoryRepo.countByUserIdAndName(postCategory.getUser().getId(), postCategory.getName()) <= 0 ? true : false;
-//    }
-
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public class ReqPostCreateDto {
     private String title;
     private String content;
-    private String[] tags;
+    private List<String> tags;
     private Long userId;
 
     public Post toPost(User user) {

@@ -6,9 +6,11 @@ import me.studybook.api.dto.req.ReqPostCreateDto;
 import me.studybook.api.dto.res.ResPostDetailDto;
 import me.studybook.api.dto.res.ResPostsDto;
 import me.studybook.api.service.PostService;
+import me.studybook.api.service.TokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +49,11 @@ public class PostController {
     }
 
     @PostMapping("")
-    public ResponseEntity create(ReqPostCreateDto postCreateDto) throws Exception {
-        log.info("POST:CREATE");
-        System.out.println(postCreateDto);
+    public ResponseEntity create(ReqPostCreateDto postCreateDto, HttpServletRequest request) throws Exception {
+//        log.info("POST:CREATE");
+//        String _tokenId = request.getAttribute("id").toString();
+//        Long tokenId = Long.parseLong(_tokenId);
+//        TokenService.isMatched(postCreateDto.getUserId(), tokenId);
 
         postService.create(postCreateDto);
 

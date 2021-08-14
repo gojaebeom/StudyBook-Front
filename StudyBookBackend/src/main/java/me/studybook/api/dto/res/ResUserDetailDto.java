@@ -15,12 +15,14 @@ public class ResUserDetailDto {
     private Long id;
     private String nickname;
     private String profile;
+    private String info;
 
     @Builder
-    public ResUserDetailDto(Long id, String nickname, String profile) {
+    public ResUserDetailDto(Long id, String nickname, String profile, String info) {
         this.id = id;
         this.nickname = nickname;
         this.profile = profile;
+        this.info = info;
     }
 
     public static ResUserDetailDto of(User user) {
@@ -28,6 +30,7 @@ public class ResUserDetailDto {
                 .id(user.getId())
                 .nickname(user.getNickname())
                 .profile(user.getProfile())
+                .info(user.getInfo())
                 .build();
     }
 }

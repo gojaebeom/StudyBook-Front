@@ -19,14 +19,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, length = 50)
+    @Column(name = "username", unique = true, length = 50, nullable = false)
     private String username;
 
-    @Column(name = "nickname", unique = true, length = 20)
+    @Column(name = "nickname", unique = true, length = 20, nullable = false)
     private String nickname;
 
     @Column(name ="profile", length = 150)
     private String profile;
+
+    @Column(name ="info", length = 150)
+    private String info;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -35,10 +38,11 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Builder
-    public User(Long id, String username, String nickname, String profile) {
+    public User(Long id, String username, String nickname, String profile, String info) {
         this.id = id;
         this.username = username;
         this.nickname = nickname;
         this.profile = profile;
+        this.info = info;
     }
 }

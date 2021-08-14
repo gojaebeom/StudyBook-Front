@@ -19,18 +19,6 @@ public class TokenValidationIC implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("토큰 유효성 검사 인터셉터");
 
-//        String token = null;
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for(Cookie c : cookies) {
-//                System.out.println(c.getName());
-//                System.out.println(c.getValue());
-//                if(c.getName().equals("act")){
-//                    token = c.getValue();
-//                }
-//            }
-//        }
-
         String tokenString = request.getHeader("Authorization");
         if(tokenString == null){
             throw new AuthenticationException("PERMISSION_NOT_DEFINE");

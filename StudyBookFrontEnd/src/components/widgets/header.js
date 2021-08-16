@@ -51,7 +51,7 @@ function Header(){
                             className={`${loggedInMenuState ? "flex" : "hidden"} flex-col rounded-sm absolute right-0 -bottom-52 w-40 bg-white border z-10`}>
                             <Link to={`/users/${ loginState.userId }`} className="p-3 border-b">내 정보</Link>
                             <Link to="/draft" className="p-3 border-b">글 작성</Link>
-                            <Link to={`/users/${ loginState.userId }/update`} className="p-3 border-b">내 정보 수정</Link>
+                            <Link to={`/users/${ loginState.userId }/edit`} className="p-3 border-b">내 정보 수정</Link>
                             <div
                                 onClick={logoutHandler}
                                 className="p-3 border-b-2">

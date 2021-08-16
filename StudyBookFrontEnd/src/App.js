@@ -4,6 +4,7 @@ import LoggedInGlobal from "./components/global/loggedInGlobal";
 import RefreshPage from "./components/global/refreshPage";
 import SearchGlobal from "./components/global/searchGlobal";
 import Error404Page from "./components/pages/error/404";
+import UserEditPage from "./components/pages/error/userEditPage";
 import JoinPage from "./components/pages/joinPage";
 import KakaoJoinPage from "./components/pages/kakaoJoinPage";
 import MainPage from "./components/pages/mainPage";
@@ -35,6 +36,9 @@ function App(){
                     <Route path="/users/kakao/login">
                         <KakaoJoinPage />
                     </Route>{/* 카카오 인증 페이지 */}
+                    <Route path="/users/:id/edit">
+                        <UserEditPage />
+                    </Route>{/* 회원 수정 페이지 */}
                     <Route path="/users/:id">
                         <UserDetailPage />
                     </Route>{/* 회원 상세 페이지 */}

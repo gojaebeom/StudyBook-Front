@@ -6,37 +6,37 @@
 /* IMPORT NOTO FONT */
 @font-face {
     font-family: 'noto-black';
-    src: url(./fonts/NotoSansKR-Black.otf);
+    src: url(./assets/fonts/NotoSansKR-Black.otf);
 }
 
 @font-face {
     font-family: 'noto-bold';
-    src: url(./fonts/NotoSansKR-Bold.otf);
+    src: url(./assets/fonts/NotoSansKR-Bold.otf);
 }
 
 @font-face {
     font-family: 'noto-medium';
-    src: url(./fonts/NotoSansKR-Medium.otf);
+    src: url(./assets/fonts/NotoSansKR-Medium.otf);
 }
 
 @font-face {
     font-family: 'noto-regular';
-    src: url(./fonts/NotoSansKR-Regular.otf);
+    src: url(./assets/fonts/NotoSansKR-Regular.otf);
 }
 
 @font-face {
     font-family: 'noto-light';
-    src: url(./fonts/NotoSansKR-Light.otf);
+    src: url(./assets/fonts/NotoSansKR-Light.otf);
 }
 
 @font-face {
     font-family: 'noto-thin';
-    src: url(./fonts/NotoSansKR-Thin.otf);
+    src: url(./assets/fonts/NotoSansKR-Thin.otf);
 }
 
 @font-face {
     font-family: 'pacifico';
-    src: url(./fonts/Pacifico-Regular.ttf);
+    src: url(./assets/fonts/Pacifico-Regular.ttf);
 }
 
 /* body{
@@ -83,4 +83,20 @@
 
 .sticky{
     position: sticky;
+}
+
+
+.section::-webkit-scrollbar {
+    width: 10px;
+}
+
+.section::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+
+.section::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
 }

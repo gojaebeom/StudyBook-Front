@@ -4,6 +4,7 @@ module.exports = {
     theme: {
         extend: {
         width:{
+            "95p":"98%",
             "600":"600px",
             "700":"700px",
             "800":"800px",
@@ -11,7 +12,9 @@ module.exports = {
             "1000":"1000px",
         },
         height:{
-            "600":"600px"
+            "600":"600px",
+            "90p":"90%",
+            "95p":"95%"
         },
         fontFamily: {
             'noto-regular': ['noto-regular'],

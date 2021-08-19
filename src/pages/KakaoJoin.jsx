@@ -2,6 +2,7 @@ import axios from "axios";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
+import { apiScaffold } from "../api";
 
 const KakaoJoin = ({location}) => {
 
@@ -27,30 +28,38 @@ const KakaoJoin = ({location}) => {
             data: params,
         })
         .then(data => data.data)
-        .catch(err => console.log(err));
+        .catch(err => err.response.status);
 
-        console.log(kakaoRes.access_token);
+        if(kakaoRes === 500){
+            return alert("카카오 서버요청이 정상적으로 처리되지 않았습니다.");
+        }
 
-        // const studybookRes = await axios({
-        //     method: "post",
-        //     url: "/api/users/kakao-login",
-        //     withCredentials: true,
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     data: {"accessToken": kakaoRes.access_token},
-        // })
-        // .then(data => data.data)
-        // .catch(err => console.log(err));
+        // console.log(kakaoRes.access_token);
 
-        // console.log(studybookRes);
+        const studybookRes = await axios({
+            method: "post",
+            url: "/api/users/kakao-login",
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: {"accessToken": kakaoRes.access_token},
+        })
+        .then(data => data.data)
+        .catch(err => err.response.status);
 
-        // const { accessToken, refreshToken, userId, profile } = studybookRes.tokens;
+        console.log(studybookRes);
 
-        // window.localStorage.setItem("act", accessToken);
-        // window.localStorage.setItem("rft", refreshToken);
+        if(studybookRes === 500){
+            return alert("서버요청이 정상적으로 처리되지 않았습니다.");
+        }
 
-        // dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: userId, profile: profile !== null ? profile : null }});
+        const { accessToken, refreshToken, userId, profile } = studybookRes.tokens;
+
+        window.localStorage.setItem("act", accessToken);
+        window.localStorage.setItem("rft", refreshToken);
+
+        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: userId, profile: profile !== null ? profile : null }});
     });
 
     return <Redirect to="/"/>;

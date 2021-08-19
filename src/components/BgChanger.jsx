@@ -26,6 +26,14 @@ const BgChanger = () => {
             dispatch({type: "BG_CHANGE", payload: 3});
             window.localStorage.setItem("bgColor", 3);
         }
+        else if(value === 4){
+            dispatch({type: "BG_CHANGE", payload: 4});
+            window.localStorage.setItem("bgColor", 4);
+        }
+        else if(value === 5){
+            dispatch({type: "BG_CHANGE", payload: 5});
+            window.localStorage.setItem("bgColor", 5);
+        }
             
     }
 
@@ -43,11 +51,23 @@ const BgChanger = () => {
         >
             { bgState.id === 2 && <div id="pin" className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-pink-500 shadow"></div>}
         </button>
-        <button className="relative w-12 h-12 rounded-full bg-gray-200 border-2 border-white shadow-lg"
+        <button className="relative w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 border-2 border-white shadow-lg mb-2"
                 value="3"
                 onClick={bgChangeButtonClick}
         >
-            { bgState.id === 3 && <div id="pin" className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-gray-300 shadow"></div>}
+            { bgState.id === 3 && <div id="pin" className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-red-400 shadow"></div>}
+        </button>
+        <button className="relative w-12 h-12 rounded-full bg-gray-200 border-2 border-white shadow-lg mb-2"
+                value="4"
+                onClick={bgChangeButtonClick}
+        >
+            { bgState.id === 4 && <div id="pin" className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-gray-300 shadow"></div>}
+        </button>
+        <button className="relative w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-500 border-2 border-white shadow-lg"
+                value="5"
+                onClick={bgChangeButtonClick}
+        >
+            { bgState.id === 5 && <div id="pin" className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-gray-500 shadow"></div>}
         </button>
     </div>
     )

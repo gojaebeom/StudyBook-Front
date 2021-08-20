@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, Route, Switch } from "react-router-dom";
 import BgChanger from "./components/BgChanger";
@@ -22,12 +22,21 @@ import UserEdit from "./pages/UserEdit";
 function App() {
     const bgState = useSelector(s=>s.bgColor);
 
+    const [toggle, setToggle] = useState(true);
+
+    const toggleHandler = () => {
+        setToggle(!toggle);
+    }
+
     return (
     <RefreshHandler>
         <LoginNavHandler>
-            <div className={`w-full h-screen ${bgState.color} flex justify-center items-start`}>
+            <div className={`w-full h-screen ${bgState.color} flex flex-col items-center justify-start`}>
                 <BgChanger />
-                <div id="app-container" className="w-full h-95p md:w-800 bg-white rounded-b-xl">
+                <div 
+                    id="app-container" 
+                    className={`relative w-full md:h-${toggle ? `95p`:`20`} md:w-800 bg-white rounded-b-xl overflow-hidden transition-all duration-200 delay-200`}
+                >
                     <Header />
                     <main className="w-full h-87p p-3 flex flex-col items-center overflow-x-hidden md:overflow-y-auto section pr-2">
                         <Switch>
@@ -43,7 +52,7 @@ function App() {
                             <Route exact path="/posts/:id">
                                 <PostDetail />
                             </Route>
-                           
+                        
                             <Route exact path="/about">
                                 <About />
                             </Route>
@@ -65,6 +74,15 @@ function App() {
                             </Route>
                         </Switch>
                     </main>
+                </div>
+                <div className="relative w-full md:w-800 flex justify-center items-center">
+                    <div className="absolute left-0 -top-6 w-full flex justify-center items-center">
+                        <button className="w-12 h-12 rounded-full bg-indigo-400 border-4 border-white hover:bg-indigo-500 transition-all"
+                            onClick={toggleHandler}
+                        >
+                            <i className="fas fa-arrows-alt-v text-xl text-white"></i>
+                        </button>
+                    </div>
                 </div>
                 <Toast />
             </div>

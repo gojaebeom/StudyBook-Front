@@ -5,17 +5,20 @@ import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
 
 
-const UserEdit = ({ location }) => {
+const UserEdit = ({ history }) => {
 
     const imgRef = useRef();
+    const dispatch = useDispatch();
     
     const [user, setUser] = useState({
         profile: "",
         profileFile: null,
         nickname: "",
-        info: ""
+        info: "반가워요 🖐",
+        initImg: false
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async () => {
@@ -31,8 +34,8 @@ const UserEdit = ({ location }) => {
             ...user,
             id: res.user.id,
             nickname: res.user.nickname,
-            profile: res.user.profile,
-            info: res.user.info
+            profile: res.user.profilePreview ? "/images/"+res.user.profilePreview : "",
+            info: res.user.info? res.user.info : "반가워요 🖐",
         });
 
         console.log(user);
@@ -49,7 +52,7 @@ const UserEdit = ({ location }) => {
 
     const imgDeleteButtonClick = () => {
         imgRef.current.value = "";
-        setUser({...user, profile:"", profileFile:null});
+        setUser({...user, profile:"", profileFile:null, initImg: true});
     }
 
     const inputHandler = (e) => {
@@ -81,14 +84,54 @@ const UserEdit = ({ location }) => {
         const reader = new FileReader()
         // 이미지가 로드가 된 경우
         reader.onload = e => {
-            setUser({...user, profile:e.target.result, profileFile: file});
+            setUser({...user, profile:e.target.result, profileFile: file, initImg: false});
         }
         // reader가 이미지 읽도록 하기
         reader.readAsDataURL(e.target.files[0])
     }
+    const stopHandler = () => {
+        history.push("/");
+    }
 
-    const submmitHandler = () => {
+    const submmitHandler = async () => {
         console.log(user);
+
+        const formData =new FormData();
+        formData.append("id", user.id);
+        formData.append("nickname", user.nickname);
+        formData.append("info", user.info);
+        if(user.profileFile){
+            formData.append("profile", user.profileFile);
+        }
+        formData.append("initImg", user.initImg);
+
+
+        dispatch({type: "SET_TOAST", payload:{
+            type: "INFO",
+            content: "회원정보를 수정중입니다."
+        }});
+
+        const res = await apiScaffold({
+            METHOD: "PUT",
+            URL: `/api/users/${user.id}`,
+            DATA: formData
+        });
+
+        dispatch({type: "SET_TOAST", payload:{
+            type: "SUCCESS",
+            content: "회원정보가 수정되었습니다."
+        }});
+
+        if(user.initImg){
+            dispatch({type:"REFRESH_PROFILE", payload: "" });
+        }
+
+        if(res.token){
+            window.localStorage.setItem("act", res.token);
+            const act = jwtDecode(res.token);
+            dispatch({type:"REFRESH_PROFILE", payload: "/images/"+act.profile });
+        }
+        history.push("/");
     } 
 
     return(
@@ -128,7 +171,7 @@ const UserEdit = ({ location }) => {
                 <textarea 
                     className="p-2 border rounded-sm" 
                     name="info" 
-                    value={user.info ? user.info : "반가워요 🖐"} 
+                    value={user.info} 
                     onChange={inputHandler}>
                 </textarea>
             </div>
@@ -139,6 +182,7 @@ const UserEdit = ({ location }) => {
         <div className="w-8/12 flex justify-center mt-5 mb-16">
             <button 
                 className="p-3 px-10 bg-gray-300  text-white font-noto-bold text-2xl rounded-sm mt-10 mr-10"
+                onClick={stopHandler}
             >
                 취소
             </button>

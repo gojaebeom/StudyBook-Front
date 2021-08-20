@@ -1,4 +1,4 @@
-import cover01 from "../assets/images/StudyBook.svg";
+import defaultImg from "../assets/images/StudyBook.svg";
 import { Link, withRouter } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import React, { useEffect, useState } from "react";
@@ -34,7 +34,7 @@ const UserDetail = ({ location }) => {
         setDetail({
             id: res.user.id,
             nickname: res.user.nickname,
-            profile: res.user.profile,
+            profile: res.user.profilePreview? "/images/"+res.user.profilePreview : "",
             info: res.user.info,
             posts: res.posts
         });
@@ -60,7 +60,7 @@ const UserDetailChild = ({ nickname, profile, info, items }) => {
         <div className="w-full">
             <div className="w-full bg-gray-50 flex justify-center items-start p-5 rounded-md mb-10">
                 <div className="block relative w-20 h-20 mr-5">
-                    <img alt="profil" src={cover01} className="mx-auto object-cover rounded-full h-20 w-20 "/>
+                    <img alt="profil" src={profile? profile: defaultImg} className="mx-auto object-cover rounded-full h-20 w-20 "/>
                 </div>
                 <div className="block relative w-10/12">
                     <div className="font-noto-black text-3xl text-black">{nickname}</div>
@@ -108,12 +108,12 @@ const UserDetailChild = ({ nickname, profile, info, items }) => {
                     {
                         items.map(e => {
                             return(
-                            <tr>
+                            <tr key={e.id}>
                                 <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
                                             <Link to="/" className="block relative">
-                                                <img alt="profil" src={cover01} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                <img alt="profil" src={e.user.profilePreview? "/images/"+e.user.profilePreview : defaultImg} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                             </Link>
                                         </div>
                                         <div className="ml-3">

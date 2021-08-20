@@ -25,7 +25,7 @@ function RefreshHandler({ children }){
             console.log(decode);
             dispatch({type:"IS_LOGGED_IN", payload:{
                 userId: decode.id,
-                profile: ""
+                profile: decode.profile ?  "/images/"+decode.profile : ""
             }});
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps

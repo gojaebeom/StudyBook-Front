@@ -1,7 +1,7 @@
 const initialState = {
     isLoggedIn: false,
-    userId: null,
-    profile: null,
+    userId: "",
+    profile: "",
 };
 
 const login = (state=initialState, action) => {
@@ -10,6 +10,8 @@ const login = (state=initialState, action) => {
             return {...action.payload, isLoggedIn: true};
         case "IS_LOGGED_OUT" :
             return {...state, isLoggedIn: false};
+        case "REFRESH_PROFILE" :
+            return {...state, profile: action.payload};
         default :
             return state;
     }

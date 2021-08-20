@@ -12,7 +12,7 @@ const PostDetail = ({ location }) => {
         title:"",
         user:{
             nickname:"",
-            profile:""
+            profilePreview:""
         },
         publishedAt:"",
         content:"",
@@ -35,8 +35,9 @@ const PostDetail = ({ location }) => {
             "METHOD":"GET",
             "URL":`/api/posts/${location.pathname.split("/posts/")[1]}`
         });
-        console.log(res);
+        console.log(res.post);
         setDetail(res.post);
+        
         // dispatch({type:"SET_POST_DETAIL", payload: {...res.post}});
 
         new Viewer({
@@ -63,10 +64,10 @@ const PostDetail = ({ location }) => {
 
     return(
     <div className="w-full px-5">
-        <div className={`w-full font-noto-black text-5xl ${ titleColor }  leading-tight flex justify-center`}>{detail.title}</div>
+        <div className={`w-full font-noto-black text-4xl ${ titleColor }  leading-tight flex justify-center`}>{detail.title}</div>
         <div className="flex justify-center items-center my-10">
-            <Link to="/users/1" className="w-16 h-16 flex justify-center items-center border rounded-full mr-3">
-                <img src={detail.profile ? detail.profile : coverImg} alt="img" className="rounded-full w-12 h-12"/>
+            <Link to={`/users/${detail.user.id}`} className="w-12 h-12 flex justify-center items-center border rounded-full mr-3">
+                <img src={ detail.user.profilePreview ? "/images/"+detail.user.profilePreview : coverImg} alt="img" className="rounded-full w-10 h-10"/>
             </Link>
             <div className="flex items-center">
                 <div className="flex flex-col items-start  mr-5">

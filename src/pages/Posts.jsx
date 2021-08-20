@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import profileImg from "../assets/images/StudyBook.svg";
-
-// images
-import cover01 from "../assets/images/cover01.jpg";
-import cover02 from "../assets/images/cover02.jpg";
-import cover03 from "../assets/images/cover03.jpg";
-import cover04 from "../assets/images/cover04.jpg";
-import cover05 from "../assets/images/cover05.gif";
-import cover06 from "../assets/images/cover06.jpg";
-import cover07 from "../assets/images/cover07.jpg";
-import cover08 from "../assets/images/cover08.jpg";
-import cover09 from "../assets/images/cover09.jpg";
 import Pagination from "../components/Pagination";
 import { apiScaffold } from "../api";
+
+
 
 const Posts = () => {
 
     const [postState, setPostState] = useState({
         total: 0,
-        sortType: "",
+        page:1,
+        sort: "recent", // recent | old | views
+        search: "",
+        isWait: false,
         posts: [
             {
                 id:1,
                 user: {
-                    profile:"",
+                    profilePreview:"",
                     nickname:"",
                 },
                 title:"",
                 publishedAt:"",
                 content:"",
+                views: 0,
                 tags:[]
             },
         ]
@@ -39,12 +34,14 @@ const Posts = () => {
     useEffect(async () => {
         const res = await apiScaffold({
             "METHOD": "GET",
-            "URL":"/api/posts?userId=1"
+            "URL":`/api/posts?page=${postState.page}&sort=${postState.sort}`
         });
         
         if(res.status === 500){
             return alert(res.message);
         }
+
+        console.log(res);
 
         setPostState({
             ...postState,
@@ -53,25 +50,50 @@ const Posts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
+    let timer;
+    const searchHandler = (e) => {
+        if(timer) {
+            clearTimeout(timer);
+        }
+
+        timer = setTimeout(() => {
+            console.log(e.target.value);
+        }, 500);
+    }
+
+    const sortHandler = (e) => {
+        const value = e.target.value;
+        console.log(value);
+        if(value === "recent") setPostState({...postState, sort: "recent"});
+        else if(value === "old") setPostState({...postState, sort: "old"});
+        else if(value === "views") setPostState({...postState, sort: "views"});
+    }
+
     return(
     <React.Fragment>
         <div className="w-full flex flex-col md:flex-row justify-between ">
-            <div className="p-2 mb-2 md:mb-0 border md:border-0 flex items-center bg-gray-50 w-72 rounded-sm ">
-                <select className="outline-none rounded-sm bg-gray-50">
+            <div className="w-full md:w-72 p-2 mb-2 md:mb-0 flex items-center bg-gray-100  rounded-sm">
+                {/* <select className="outline-none rounded-sm bg-gray-50">
                     <option>제목</option>
                     <option>태그</option>
                     <option>작성자</option>
-                </select>
+                </select> */}
                 <i className="fas fa-search text-black mx-2"></i>
-                <input className="w-full bg-gray-50 outline-none text-black font-noto-light" placeholder="search a posts"/>
+                <input 
+                    className="w-full bg-gray-100 outline-none text-black font-noto-light" 
+                    placeholder="search a posts"
+                    onChange={searchHandler}
+                />
             </div>
-            <div className="p-2 bg-gray-50 flex justify-center items-center border md:border-0 rounded-sm">
+            <div className="p-2 bg-gray-100 flex justify-center items-center rounded-sm">
                 <i className="fas fa-filter text-black"></i>
-                <select className="outline-none font-noto-regular bg-gray-50">
-                    <option>최근</option>
-                    <option>오래된</option>
-                    <option>조회수</option>
-                    <option>인기</option>
+                <select className="outline-none font-noto-regular bg-gray-100"
+                    value={postState.sort}
+                    onChange={sortHandler}
+                >
+                    <option value="recent">최근</option>
+                    <option value="old">오래된</option>
+                    <option value="views">조회수</option>
                 </select>
             </div>
         </div>
@@ -95,14 +117,16 @@ const Posts = () => {
                 </thead>
                 <tbody>
                     {
-                        postState.posts.map(e=> {
+                        postState.isWait ? <tr><td colSpan="5">데이터를 검색중입니다..</td></tr> 
+                        
+                        :postState.posts.map(e=> {
                             return(
                             <tr key={e.id} >
                                 <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
                                             <Link to={`/users/${e.user.id}`} className="block relative">
-                                                <img alt="profile" src={cover01} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                <img alt="profile" src={e.user.profilePreview? "/images/"+e.user.profilePreview: profileImg} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                             </Link>
                                         </div>
                                         <div className="ml-3">
@@ -129,13 +153,14 @@ const Posts = () => {
                                         <span aria-hidden="true" className="absolute inset-0 bg-green-200 opacity-50 rounded-full">
                                         </span>
                                         <span className="relative">
-                                            1,000
+                                            { e.views }
                                         </span>
                                     </span>
                                 </td>
                             </tr>
                             )
                         })
+                        
                     }
                 </tbody>
             </table>

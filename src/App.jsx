@@ -25,9 +25,9 @@ function App() {
     return (
     <RefreshHandler>
         <LoginNavHandler>
-            <div className={`w-full h-screen ${bgState.color} flex justify-center items-end md:items-center`}>
+            <div className={`w-full h-screen ${bgState.color} flex justify-center items-start`}>
                 <BgChanger />
-                <div id="app-container" className="w-full h-95p md:w-1000 md:h-90p bg-white rounded-t-xl md:rounded-xl">
+                <div id="app-container" className="w-full h-95p md:w-800 bg-white rounded-b-xl">
                     <Header />
                     <main className="w-full h-87p p-3 flex flex-col items-center overflow-x-hidden md:overflow-y-auto section pr-2">
                         <Switch>

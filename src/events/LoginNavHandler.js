@@ -6,11 +6,8 @@ const LoginNavHandler = ({ children }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("로그인 매뉴 토글 이벤트 생성");
-
         function loggedInMenuToggle(e){
             let el = e.target;
-            console.log(el.nodeName);
     
             const target = document.querySelector("#loggedin-toggle");
             while (el) {

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import defaultProfile from "../../assets/images/StudyBook.svg";
 
-const Header = () => {
+const Header = ({ history }) => {
 
     const loginState = useSelector(state => state.login);
     const loginNavState = useSelector(state => state.loginNav);
@@ -16,6 +16,7 @@ const Header = () => {
         window.localStorage.removeItem("act");
         window.localStorage.removeItem("rft");
         dispatch({type: "IS_LOGGED_OUT"});
+        history.push("/");
     }
 
     return(
@@ -64,4 +65,4 @@ const Header = () => {
     </header>
     );
 }
-export default Header;
+export default withRouter(Header);

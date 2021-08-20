@@ -18,7 +18,7 @@ const Login = () => {
 
     return(
     <React.Fragment>
-        <div className="w-10/12 md:w-6/12 h-full flex flex-col justify-center items-center">
+        <div className="w-10/12 md:w-8/12 h-full flex flex-col justify-center items-center">
             <img src={LoginCoverImg} alt="login" className="w-10/12"/>
             <br/>
             <a

@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
@@ -54,12 +55,14 @@ const KakaoJoin = ({location}) => {
             return alert("서버요청이 정상적으로 처리되지 않았습니다.");
         }
 
-        const { accessToken, refreshToken, userId, profile } = studybookRes.tokens;
+        const { accessToken, refreshToken } = studybookRes.tokens;
 
         window.localStorage.setItem("act", accessToken);
         window.localStorage.setItem("rft", refreshToken);
 
-        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: userId, profile: profile !== null ? profile : null }});
+        const act = jwtDecode(accessToken);
+
+        dispatch({type: "IS_LOGGED_IN", payload:{...loginState, isLoggedIn: true, userId: act.id, profile: act.profile ? "/images/"+act.profile : "" }});
     });
 
     return <Redirect to="/"/>;

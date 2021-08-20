@@ -12,7 +12,7 @@ function Toast(){
             
             delay = setTimeout(() => {
                 dispatch({type: "CLOSE_TOAST"});
-            }, 3000);
+            }, 2000);
         }
         return () => {
             console.log(delay);

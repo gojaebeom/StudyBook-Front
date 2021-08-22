@@ -1,10 +1,10 @@
-import homeHandler from "../events/homeHandler";
+import withHomeHandler from "../hooks/withHomeHandler";
 
 const Home = ({ news }) => {
 
     return(
     <div className="w-full px-2">
-        <h1 className="font-noto-bold text-3xl mb-5">오늘의 뉴스 🍰</h1>
+        <h1 className="font-noto-bold text-3xl mb-5">IT 타임라인 🍰</h1>
         {
             news.map((e, index)=>{
                 if(index % 2 === 0){
@@ -31,4 +31,4 @@ const Home = ({ news }) => {
     </div>
     )
 }
-export default homeHandler(Home);
+export default withHomeHandler(Home);

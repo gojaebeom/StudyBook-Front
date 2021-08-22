@@ -5,6 +5,7 @@ import BgChanger from "./components/BgChanger";
 
 
 import Header from "./components/shared/Header";
+import Jukebox from "./components/shared/Jukebox";
 import Toast from "./components/shared/Toast";
 import LoginNavHandler from "./events/LoginNavHandler";
 import RefreshHandler from "./events/RefreshHandler";
@@ -33,12 +34,13 @@ function App() {
         <LoginNavHandler>
             <div className={`w-full h-screen ${bgState.color} flex flex-col items-center justify-start`}>
                 <BgChanger />
+                <Jukebox />
                 <div 
                     id="app-container" 
-                    className={`relative w-full md:h-${toggle ? `95p`:`20`} md:w-800 bg-white rounded-b-xl overflow-hidden transition-all duration-200 delay-200`}
+                    className={`relative w-full h-${toggle ? `95p`:`20`} md:w-800 bg-white rounded-b-xl overflow-hidden transition-all duration-200 delay-200`}
                 >
                     <Header />
-                    <main className="w-full h-87p p-3 flex flex-col items-center overflow-x-hidden md:overflow-y-auto section pr-2">
+                    <main className="w-full h-87p p-3 flex flex-col items-center overflow-x-hidden md:overflow-y-auto section pr-2 z-30">
                         <Switch>
                             <Route exact path="/">
                                 <Home />
@@ -76,7 +78,7 @@ function App() {
                     </main>
                 </div>
                 <div className="relative w-full md:w-800 flex justify-center items-center">
-                    <div className="absolute left-0 -top-6 w-full flex justify-center items-center">
+                    <div className="absolute left-0 -top-6 w-full flex justify-center items-center z-10">
                         <button className="w-12 h-12 rounded-full bg-indigo-400 border-4 border-white hover:bg-indigo-500 transition-all"
                             onClick={toggleHandler}
                         >
@@ -85,7 +87,9 @@ function App() {
                     </div>
                 </div>
                 <Toast />
+                
             </div>
+           
         </LoginNavHandler>
     </RefreshHandler>
     );

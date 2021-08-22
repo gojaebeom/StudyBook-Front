@@ -86,21 +86,18 @@ const UserDetailChild = ({ nickname, profile, info, items }) => {
                 <div className="w-auto font-noto-thin text-xs p-1 rounded-r-sm bg-gray-200">5</div>
             </Link>
         </div>
-        <div className="w-full flex flex-col items-center mt-5 overflow-x-hidden md:overflow-y-auto md:section pr-2">
+        <div className="w-full flex flex-col items-center mt-5 pr-2">
             <table className="min-w-full leading-normal rounded-md overflow-hidden table-fixed">
-                <thead >
+                <thead>
                     <tr>
-                        <th  scope="col" className="hidden md:table-cell px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                            User
-                        </th>
                         <th colSpan="3" scope="col" className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                            Title
+                            제목
                         </th>
                         <th  scope="col" className="hidden md:table-cell px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                            Created at
+                            작성일
                         </th>
                         <th  scope="col" className="hidden md:table-cell px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                            status
+                            조회수
                         </th>
                     </tr>
                 </thead>
@@ -109,24 +106,10 @@ const UserDetailChild = ({ nickname, profile, info, items }) => {
                         items.map(e => {
                             return(
                             <tr key={e.id}>
-                                <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <div className="flex items-center">
-                                        <div className="flex-shrink-0">
-                                            <Link to="/" className="block relative">
-                                                <img alt="profil" src={e.user.profilePreview? "/images/"+e.user.profilePreview : defaultImg} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                                            </Link>
-                                        </div>
-                                        <div className="ml-3">
-                                            <p className="text-gray-900 whitespace-no-wrap">
-                                                { e.user.nickname }
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
                                 <td colSpan="3" className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
-                                    <p className="text-gray-900 whitespace-no-wrap truncate">
+                                    <Link to={`/posts/${e.id}`} className="text-gray-900 whitespace-no-wrap truncate hover:text-indigo-500">
                                         { e.title }
-                                    </p>
+                                    </Link>
                                 </td>
                                 <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p className="text-gray-900 whitespace-no-wrap">
@@ -135,11 +118,7 @@ const UserDetailChild = ({ nickname, profile, info, items }) => {
                                 </td>
                                 <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden="true" className="absolute inset-0 bg-green-200 opacity-50 rounded-full">
-                                        </span>
-                                        <span className="relative">
-                                            active
-                                        </span>
+                                        {e.views}
                                     </span>
                                 </td>
                             </tr>

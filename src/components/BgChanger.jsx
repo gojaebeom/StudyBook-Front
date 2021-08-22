@@ -38,7 +38,7 @@ const BgChanger = () => {
     }
 
     return(
-    <div id="bgChangeButtonWrap" className="hidden fixed left-5 top-5 md:flex flex-col items-center">
+    <div id="bgChangeButtonWrap" className="hidden fixed left-5 top-5 md:flex flex-col items-center z-30">
         <button className="relative w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-green-400 border-2 border-white mb-2 shadow-lg" 
                 value="1" 
                 onClick={bgChangeButtonClick}

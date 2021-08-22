@@ -29,7 +29,7 @@ const withPostsHandler = Posts => {
         useEffect(async () => {
             const res = await apiScaffold({
                 "METHOD": "GET",
-                "URL":`/api/posts?page=${postState.page}&sort=${postState.sort}&keyword=${postState.keyword}`
+                "URL":`https://api.studybook.me/api/posts?page=${postState.page}&sort=${postState.sort}&keyword=${postState.keyword}`
             });
             setPostState({...postState, posts:res.posts});
         // eslint-disable-next-line react-hooks/exhaustive-deps

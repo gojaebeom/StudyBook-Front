@@ -27,7 +27,7 @@ const UserEdit = ({ history }) => {
 
         const res = await apiScaffold({
             "METHOD": "GET",
-            "URL": `/api/users/${act.id}`
+            "URL": `https://api.studybook.me/api/users/${act.id}`
         });
         console.log(res);
         setUser({

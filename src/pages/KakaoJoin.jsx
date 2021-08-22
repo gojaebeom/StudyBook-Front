@@ -39,7 +39,7 @@ const KakaoJoin = ({location}) => {
 
         const studybookRes = await axios({
             method: "post",
-            url: "/api/users/kakao-login",
+            url: "https://api.studybook.me/api/users/kakao-login",
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",

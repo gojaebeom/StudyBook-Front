@@ -37,7 +37,7 @@ function App() {
                 <Jukebox />
                 <div 
                     id="app-container" 
-                    className={`relative w-full h-${toggle ? `95p`:`20`} md:w-800 bg-white rounded-b-xl overflow-hidden transition-all duration-200 delay-200`}
+                    className={`relative w-full ${toggle ? `h-95p`:`h-20`}  md:w-800 bg-white rounded-b-xl overflow-hidden transition-all duration-200 delay-200`}
                 >
                     <Header />
                     <main className="w-full h-87p p-3 flex flex-col items-center overflow-x-hidden md:overflow-y-auto section pr-2 z-30">

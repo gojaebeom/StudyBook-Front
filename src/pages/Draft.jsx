@@ -122,7 +122,7 @@ const Draft = ({ history }) => {
 
         await apiScaffold({
             "METHOD":"POST",
-            "URL":"/api/posts",
+            "URL":"https://api.studybook.me/api/posts",
             "DATA":formData,
         });
         dispatch({type: "SET_TOAST", payload:{

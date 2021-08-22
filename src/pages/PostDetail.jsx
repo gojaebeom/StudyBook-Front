@@ -33,7 +33,7 @@ const PostDetail = ({ location }) => {
     useEffect(async () => {
         const res = await apiScaffold({
             "METHOD":"GET",
-            "URL":`/api/posts/${location.pathname.split("/posts/")[1]}`
+            "URL":`https://api.studybook.me/api/posts/${location.pathname.split("/posts/")[1]}`
         });
         console.log(res.post);
         setDetail(res.post);

@@ -8,7 +8,7 @@ const withHomeHandler = Home => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         useEffect(async () => {
-            const res = await axios.get("/api/naver/news")
+            const res = await axios.get("https://api.studybook.me/api/naver/news")
                 .then(data => data)
                 .catch(err => {
                     console.log(err.response);

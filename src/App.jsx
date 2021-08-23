@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, Route, Switch } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 import BgChanger from "./components/BgChanger";
 
 

@@ -53,7 +53,8 @@ const Posts = ({ posts, sort, sortHandler, searchHandler }) => {
                 </thead>
                 <tbody>
                     {
-                        posts.map(e=> {
+                        posts.length 
+                        ? posts.map(e=> {
                             return(
                             <tr key={e.id} >
                                 <td className="hidden md:table-cell px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -94,11 +95,13 @@ const Posts = ({ posts, sort, sortHandler, searchHandler }) => {
                             </tr>
                             )
                         })
+                        :<tr>
+                            <td colSpan="4" className="text-center">데이터가 없습니다 😥</td>
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
-       
         <Pagination />
     </React.Fragment>
     )

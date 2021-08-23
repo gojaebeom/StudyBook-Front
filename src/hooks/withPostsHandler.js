@@ -9,20 +9,7 @@ const withPostsHandler = Posts => {
             page:2,
             sort: "recent", // recent | old | views
             keyword: "",
-            posts: [
-                {
-                    id:1,
-                    user: {
-                        profilePreview:"",
-                        nickname:"",
-                    },
-                    title:"",
-                    publishedAt:"",
-                    content:"",
-                    views: 0,
-                    tags:[]
-                },
-            ]
+            posts: []
         });
     
         // eslint-disable-next-line react-hooks/exhaustive-deps
